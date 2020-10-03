@@ -3,6 +3,11 @@ import {
     getRepository
 } from 'typeorm';
 
+import {
+    Container,
+    injectable
+} from 'inversify';
+
 import  Team from '../models/team.entity';
 
 interface ITeamRepo {
@@ -13,8 +18,11 @@ interface ITeamRepo {
     getTeams(): Promise<Team[]>,
 }
 
-export {ITeamRepo};
+const repoTypes = {
+    ITeamRepo: Symbol("ITeamRepo")
+}
 
+@injectable()
 class TeamRepo implements ITeamRepo {
     async addTeam(teamName: string) {
         const teamRepo = await getRepository(Team);
@@ -66,3 +74,10 @@ class TeamRepo implements ITeamRepo {
         return [newTeam];
     }
 };
+
+const teamRepoContainer = new Container();
+
+teamRepoContainer.bind<ITeamRepo>(repoTypes.ITeamRepo).to(TeamRepo);
+
+export {ITeamRepo, teamRepoContainer, repoTypes};
+

@@ -2,15 +2,30 @@ import {
     Response,
     Request
 } from "express";
+import { 
+    inject,
+    Container, 
+    injectable
+} from "inversify";
 
 import {
-    ITeamRepo
+    ITeamRepo,
+    repoTypes
 } from '../database/repositories/team.repo';
 
-class TeamControllers {
+interface ITeamController {
+    handleAddTeam: (request: Request, response: Response) => Promise<Response<any>>;
+}
+
+const controllerTypes = {
+    ITeamController: Symbol("ITeamController")
+}
+
+@injectable()
+class TeamController implements ITeamController{
     private teamRepo: ITeamRepo;
 
-    constructor (teamRepo:ITeamRepo) {
+    constructor (@inject(repoTypes.ITeamRepo) teamRepo:ITeamRepo) {
         this.teamRepo = teamRepo;
     }
 
@@ -23,3 +38,9 @@ class TeamControllers {
         })
     }
 }
+
+const teamRepoContainer = new Container();
+
+const teamController: ITeamController = teamRepoContainer.get<ITeamController>(controllerTypes.ITeamController);
+
+export {teamController};
