@@ -2,45 +2,41 @@ import {
     Response,
     Request
 } from "express";
-import { 
-    inject,
-    Container, 
-    injectable
-} from "inversify";
 
-import {
-    ITeamRepo,
-    repoTypes
-} from '../database/repositories/team.repo';
+import TypeOrmTeamRepo from '../database/repositories/team.repo';
+import TeamRepository from '../database/teamRepo';
+import { IBaseTeamRepo } from "../Interfaces/BaseRepo";
 
-interface ITeamController {
-    handleAddTeam: (request: Request, response: Response) => Promise<Response<any>>;
-}
+const teamRepo: IBaseTeamRepo = new TeamRepository(new TypeOrmTeamRepo());
 
-const controllerTypes = {
-    ITeamController: Symbol("ITeamController")
-}
+class TeamController {
+    // private teamRepo: IBaseTeamRepo = new TeamRepository(new TypeOrmTeamRepo());
 
-@injectable()
-class TeamController implements ITeamController{
-    private teamRepo: ITeamRepo;
+    public teamRepo: TeamRepository;
 
-    constructor (@inject(repoTypes.ITeamRepo) teamRepo:ITeamRepo) {
-        this.teamRepo = teamRepo;
+    constructor() {
+        const repo = new TypeOrmTeamRepo(); 
+        this.teamRepo = new TeamRepository(repo);
+        console.log(this.teamRepo);
     }
 
-    async handleAddTeam(request: Request, response: Response) {
-        const newTeamName = request.body;
-        const newTeam = this.teamRepo.addTeam(newTeamName);
-        
-        return response.json({
-            newTeam
-        })
+    public async addTeam(request: Request, response: Response) {
+        try {
+            console.log("Dale")
+            const { teamName } = request.body;
+            console.log(this.teamRepo);
+            console.log("Dale")
+
+            // const newTeam = await teamRepo.create(teamName);
+            const newTeam = await this.teamRepo.create(teamName);
+            console.log(newTeam);
+
+            return response.json(newTeam)
+        } catch(error) {
+            console.log(error);
+            return response.status(404).json(error);
+        }
     }
-}
+};
 
-const teamRepoContainer = new Container();
-
-const teamController: ITeamController = teamRepoContainer.get<ITeamController>(controllerTypes.ITeamController);
-
-export {teamController};
+export {TeamController};
