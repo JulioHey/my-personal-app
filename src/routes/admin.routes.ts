@@ -1,14 +1,19 @@
-import express from 'express';
+import {
+    Router,
+    Request,
+    Response
+} from 'express';
 
 import {
     TeamController
 } from '../controllers/team.controller';
-import TypeOrmTeamRepo from '../database/repositories/team.repo';
 
 const teamController = new TeamController();
 
-const adminRoutes = express.Router();
+const adminRoutes = Router();
 
-adminRoutes.post("/", teamController.addTeam);
+adminRoutes.post("/", (request: Request, response: Response) => {
+        return teamController.addTeam(request, response);
+    });
 
 export {adminRoutes};

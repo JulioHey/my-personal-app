@@ -5,7 +5,9 @@ import {
 import  Team from '../models/team.entity';
 
 import { IBaseTeamRepo } from '../../Interfaces/BaseRepo';
+import { injectable } from 'tsyringe';
 
+@injectable()
 export default class TypeOrmTeamRepo implements IBaseTeamRepo {
     public async create(newTeamName: string): Promise<any> {
         try {

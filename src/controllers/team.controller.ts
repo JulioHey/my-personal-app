@@ -6,30 +6,28 @@ import {
 import TypeOrmTeamRepo from '../database/repositories/team.repo';
 import TeamRepository from '../database/teamRepo';
 import { IBaseTeamRepo } from "../Interfaces/BaseRepo";
+import { teamTypes } from "../inversify/types";
 
-const teamRepo: IBaseTeamRepo = new TeamRepository(new TypeOrmTeamRepo());
+// const teamRepo: TeamRepository = new TeamRepository(new TypeOrmTeamRepo());
+
+interface ITeamController {
+    addTeam(req: Request, res: Response): Promise<any>
+}
 
 class TeamController {
-    // private teamRepo: IBaseTeamRepo = new TeamRepository(new TypeOrmTeamRepo());
-
-    public teamRepo: TeamRepository;
+    private teamRepo: TeamRepository;
 
     constructor() {
-        const repo = new TypeOrmTeamRepo(); 
-        this.teamRepo = new TeamRepository(repo);
-        console.log(this.teamRepo);
+        this.teamRepo = new TeamRepository(new TypeOrmTeamRepo());
     }
-
+    
     public async addTeam(request: Request, response: Response) {
         try {
-            console.log("Dale")
-            const { teamName } = request.body;
-            console.log(this.teamRepo);
-            console.log("Dale")
+            console.log(request.body.teamName);
+            console.log(this)
 
-            // const newTeam = await teamRepo.create(teamName);
-            const newTeam = await this.teamRepo.create(teamName);
-            console.log(newTeam);
+
+            const newTeam = await this.teamRepo.create(request.body.teamName);
 
             return response.json(newTeam)
         } catch(error) {
