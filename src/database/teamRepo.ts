@@ -1,10 +1,8 @@
-import { injectable } from 'tsyringe';
 import {
     IBaseTeamRepo,
     BaseTeamModel
 } from '../Interfaces/BaseRepo';
 
-@injectable()
 class TeamRepository implements IBaseTeamRepo {
     private repository: IBaseTeamRepo;
 

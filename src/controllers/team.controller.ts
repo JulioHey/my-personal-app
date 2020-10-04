@@ -6,11 +6,6 @@ import {
 import TypeOrmTeamRepo from '../database/repositories/team.repo';
 import TeamRepository from '../database/teamRepo';
 
-
-interface ITeamController {
-    addTeam(req: Request, res: Response): Promise<any>
-}
-
 class TeamController {
     private teamRepo: TeamRepository;
 
