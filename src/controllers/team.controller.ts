@@ -2,45 +2,31 @@ import {
     Response,
     Request
 } from "express";
-import { 
-    inject,
-    Container, 
-    injectable
-} from "inversify";
 
-import {
-    ITeamRepo,
-    repoTypes
-} from '../database/repositories/team.repo';
+import TypeOrmTeamRepo from '../database/repositories/team.repo';
+import TeamRepository from '../database/teamRepo';
 
-interface ITeamController {
-    handleAddTeam: (request: Request, response: Response) => Promise<Response<any>>;
-}
+class TeamController {
+    private teamRepo: TeamRepository;
 
-const controllerTypes = {
-    ITeamController: Symbol("ITeamController")
-}
-
-@injectable()
-class TeamController implements ITeamController{
-    private teamRepo: ITeamRepo;
-
-    constructor (@inject(repoTypes.ITeamRepo) teamRepo:ITeamRepo) {
-        this.teamRepo = teamRepo;
+    constructor() {
+        this.teamRepo = new TeamRepository(new TypeOrmTeamRepo());
     }
+    
+    public async addTeam(request: Request, response: Response) {
+        try {
+            console.log(request.body.teamName);
+            console.log(this)
 
-    async handleAddTeam(request: Request, response: Response) {
-        const newTeamName = request.body;
-        const newTeam = this.teamRepo.addTeam(newTeamName);
-        
-        return response.json({
-            newTeam
-        })
+
+            const newTeam = await this.teamRepo.create(request.body.teamName);
+
+            return response.json(newTeam)
+        } catch(error) {
+            console.log(error);
+            return response.status(404).json(error);
+        }
     }
-}
+};
 
-const teamRepoContainer = new Container();
-
-const teamController: ITeamController = teamRepoContainer.get<ITeamController>(controllerTypes.ITeamController);
-
-export {teamController};
+export {TeamController};

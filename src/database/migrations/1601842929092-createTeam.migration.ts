@@ -1,19 +1,15 @@
-import {
-    MigrationInterface, 
-    QueryRunner,
-    Table
-} from "typeorm";
+import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class createTeam1601584200281 implements MigrationInterface {
-    teams = new Table({
-        name: "teams",
+export class createTeam1601842929092 implements MigrationInterface {
+    private table = new Table({
+        name: 'teams',
         columns: [
             {
-                name: "team_id",
+                name: 'team_id',
                 type: 'integer',
                 isPrimary: true,
                 isGenerated: true,
-                generationStrategy:"increment",
+                generationStrategy: "increment",
             },
             {
                 name: 'team_name',
@@ -24,11 +20,11 @@ export class createTeam1601584200281 implements MigrationInterface {
     })
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.createTable(this.teams)
+        await queryRunner.createTable(this.table);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(this.teams);
+        await queryRunner.dropTable(this.table);
     }
 
 }

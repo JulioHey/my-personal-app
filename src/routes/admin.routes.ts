@@ -1,11 +1,19 @@
-import express from 'express';
+import {
+    Router,
+    Request,
+    Response
+} from 'express';
 
-import {teamController} from '../controllers/team.controller';
+import {
+    TeamController
+} from '../controllers/team.controller';
 
-const adminRoutes = express.Router();
+const teamController = new TeamController();
+
+const adminRoutes = Router();
 
 adminRoutes.post("/", (request: Request, response: Response) => {
         return teamController.addTeam(request, response);
-});
+    });
 
 export {adminRoutes};
