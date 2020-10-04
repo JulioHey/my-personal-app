@@ -5,10 +5,7 @@ import {
 
 import TypeOrmTeamRepo from '../database/repositories/team.repo';
 import TeamRepository from '../database/teamRepo';
-import { IBaseTeamRepo } from "../Interfaces/BaseRepo";
-import { teamTypes } from "../inversify/types";
 
-// const teamRepo: TeamRepository = new TeamRepository(new TypeOrmTeamRepo());
 
 interface ITeamController {
     addTeam(req: Request, res: Response): Promise<any>

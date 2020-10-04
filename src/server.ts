@@ -1,4 +1,5 @@
 import express from 'express';
+<<<<<<< HEAD
 import cors from 'cors';
 import { createConnection } from 'typeorm';
 import "reflect-metadata";
@@ -16,3 +17,7 @@ createConnection().then(connection => {
     console.log(connection.isConnected);
     app.listen(3333);
 })
+=======
+
+const app = express;
+>>>>>>> parent of f62461e... Testing Dependency inversion
