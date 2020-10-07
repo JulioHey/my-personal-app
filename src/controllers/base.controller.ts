@@ -10,23 +10,41 @@ export default class BaseController{
     }
 
     post = async(req: Request, res: Response) => {
-        const resource = await this.service.post(req.body)
-        res.send(resource)
+        try {
+            const resource = await this.service.post(req.body)
+            return res.send(resource)
+        } catch(err){
+            return res.json(err)
+        }
     }
 
     get = async(req: Request, res: Response) => {
-        const resource = await this.service.get()
-        res.send(resource)
+        try {
+            const resource = await this.service.get(req.body)
+            return res.send(resource)
+        } catch(err){
+            return res.json(err)
+        }
     }
 
     getById = async (req: Request, res: Response) => {
-        const { id } = req.params
-        const resource = await this.service.getById(id)
-        if(resource === null){
-            res.status(400).send({message: "No data found"})
-            return
+        try {
+            const { id } = req.params;
+            const resource = await this.service.getById(id);
+            return res.send(resource)
+        } catch(err) {
+            return res.json(err)
         }
-        res.send(resource)
+    }
+
+    remove = async (req: Request, res: Response) => {
+        try{
+            const { id } = req.params
+            const resource = await this.service.remove(id)
+            return res.send(resource)
+        } catch(err) {
+            return res.json(err)
+        }
     }
 
 } 

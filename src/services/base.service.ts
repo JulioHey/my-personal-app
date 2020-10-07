@@ -18,9 +18,19 @@ export default class BaseService<T>{
         return resource
     }
 
-    getById = async (entityId: string): Promise<T> => {
+    getById = async (entityId: string): Promise<T|object> => {
         const resource = await this.model.repo.findOne(entityId) as T
+        if(resource === undefined) {
+            return ({ message: "No entity found"})
+        }
         return resource
+    }
+
+    remove = async (entityId: string) => {
+        const entityToBeRemoved = await this.model.repo.findOne(entityId) as T
+
+        const resource = await this.model.repo.remove(entityToBeRemoved);
+        return resource;
     }
 
 }

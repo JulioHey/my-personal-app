@@ -1,18 +1,11 @@
-import { Router, Request, Response } from "express";
-import TeamController from "./controllers/team.controller";
-import RoundController from "./controllers/round.controller";
-import {container} from "tsyringe";
+import { Router } from "express";
+import teamRouter from "./routes/team.routes";
+import roundRouter from "./routes/round.routes";
 
-const teamController = container.resolve(TeamController);
-const roundController = container.resolve(RoundController);
 
 const appRouter = Router();
 
-appRouter.post("/teams", (request: Request, response: Response) => {
-    return teamController.post(request, response)
-});
+appRouter.use("/round", roundRouter);
+appRouter.use("/team", teamRouter);
 
-appRouter.post("/rounds", (request: Request, response: Response) => {
-    return roundController.post(request, response)
-});
 export default appRouter;
