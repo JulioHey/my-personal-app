@@ -1,20 +1,21 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class createTeam1601842929092 implements MigrationInterface {
+export class teams1602020781561 implements MigrationInterface {
     private table = new Table({
-        name: 'teams',
+        name: "teams",
         columns: [
             {
-                name: 'team_id',
-                type: 'integer',
-                isPrimary: true,
+                name: "team_id",
+                type: "integer",
                 isGenerated: true,
+                isPrimary: true,
                 generationStrategy: "increment",
             },
             {
-                name: 'team_name',
-                type: 'varchar',
+                name: "team_name",
+                type: "varchar",
                 isNullable: false,
+                isUnique: true
             }
         ]
     })
