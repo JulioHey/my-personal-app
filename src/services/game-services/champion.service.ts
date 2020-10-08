@@ -1,8 +1,8 @@
 import { injectable } from "tsyringe";
-import ChampionSI from "../interfaces/champion.interface";
+import ChampionSI from "../../interfaces/game-interfaces/champion.interface";
 
-import { ChampionRepo } from "../models/champion.model";
-import BaseService from "./base.service";
+import { ChampionRepo } from "../../models/game-models/champion.model";
+import BaseService from "../base.service";
 
 
 @injectable()

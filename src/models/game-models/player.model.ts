@@ -1,7 +1,7 @@
 import { injectable, singleton } from "tsyringe";
 import { BaseEntity, Column, Entity, getRepository, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
-import RepoI from "../interfaces/model.interface";
-import { PlayerI } from "../interfaces/player.interfaces";
+import RepoI from "../../interfaces/model.interface";
+import { PlayerI } from "../../interfaces/game-interfaces/player.interface";
 import TeamModel from "./team.model";
 
 

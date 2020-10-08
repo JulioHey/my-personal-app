@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { container } from "tsyringe";
-import TeamController from "../controllers/team.controller";
+import TeamController from "../../controllers/game-controllers/team.controller";
 
 
 const userRouter = Router();

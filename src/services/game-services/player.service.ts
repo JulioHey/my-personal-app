@@ -1,8 +1,8 @@
 import { injectable } from "tsyringe";
-import PlayerSI from "../interfaces/player.interfaces";
+import PlayerSI from "../../interfaces/game-interfaces/player.interface";
 
-import { PlayerRepo } from "../models/player.model";
-import BaseService from "./base.service";
+import { PlayerRepo } from "../../models/game-models/player.model";
+import BaseService from "../base.service";
 
 
 @injectable()

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { container } from "tsyringe";
-import RoundController from "../controllers/round.controller";
+import RoundController from "../../controllers/game-controllers/round.controller";
 
 
 const roundRouter = Router();

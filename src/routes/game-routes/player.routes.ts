@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { container } from "tsyringe";
-import PlayerController from "../controllers/player.controller";
+import PlayerController from "../../controllers/game-controllers/player.controller";
 
 
 const playerRoutes = Router();

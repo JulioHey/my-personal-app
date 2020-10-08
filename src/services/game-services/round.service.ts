@@ -1,8 +1,8 @@
 import { injectable } from "tsyringe";
 
-import RoundSI from "../interfaces/round.interface";
-import {RoundRepo} from "../models/round.model";
-import BaseService from "./base.service";
+import RoundSI from "../../interfaces/game-interfaces/round.interface";
+import {RoundRepo} from "../../models/game-models/round.model";
+import BaseService from "../base.service";
 
 
 @injectable()

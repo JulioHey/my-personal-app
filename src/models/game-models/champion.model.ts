@@ -1,7 +1,7 @@
 import { injectable, singleton } from "tsyringe";
 import { BaseEntity, Column, Entity, getRepository, PrimaryGeneratedColumn, Repository } from "typeorm";
-import { ChampionI } from "../interfaces/champion.interface";
-import RepoI from "../interfaces/model.interface";
+import { ChampionI } from "../../interfaces/game-interfaces/champion.interface";
+import RepoI from "../../interfaces/model.interface";
 
 
 @injectable()

@@ -1,6 +1,6 @@
 import { autoInjectable, delay, inject } from "tsyringe";
-import PlayerService from "../services/player.service";
-import BaseController from "./base.controller";
+import PlayerService from "../../services/game-services/player.service";
+import BaseController from "../base.controller";
 
 @autoInjectable()
 export default class ChampionController extends BaseController {

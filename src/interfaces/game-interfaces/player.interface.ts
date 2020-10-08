@@ -1,4 +1,4 @@
-import {ModelI} from "./model.interface";
+import {ModelI} from "../model.interface";
 
 
 export interface PlayerI{

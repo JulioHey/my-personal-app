@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { container } from "tsyringe";
-import ChampionController from "../controllers/champion.controller";
+import ChampionController from "../../controllers/game-controllers/champion.controller";
 
 
 const championRoutes = Router();
