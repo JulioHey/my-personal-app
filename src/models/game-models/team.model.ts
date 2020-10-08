@@ -7,6 +7,7 @@ import {getRepository, Entity, PrimaryGeneratedColumn, Column, Repository, BaseE
 import RepoI from '../../interfaces/model.interface';
 import PlayerModel from './player.model';
 import { MatchModel } from './match.model';
+import { TeamMatchModel } from './team-match.model';
 
 @injectable()
 @Entity({name: "teams"})
@@ -34,6 +35,12 @@ export default class TeamModel extends BaseEntity implements TeamI{
         match => match.redTeamConnection
     )
     matchRedConnection: Promise<MatchModel[]>
+
+    @OneToMany(
+        () => TeamMatchModel,
+        teamMatch => teamMatch.teamConnection
+    )
+    matchConnection: Promise<TeamMatchModel[]>
 }
 
 @singleton()

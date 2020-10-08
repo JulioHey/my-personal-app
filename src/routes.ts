@@ -5,6 +5,7 @@ import championRouter from "./routes/game-routes/champion.routes";
 import playerRouter from './routes/game-routes/player.routes';
 import matchRoutes from './routes/game-routes/match.routes';
 import playerMatchRoutes from './routes/game-routes/player-match.routes';
+import teamMatchRoutes from './routes/game-routes/team-match.routes';
 
 
 const appRouter = Router();
@@ -15,5 +16,6 @@ appRouter.use("/champion", championRouter);
 appRouter.use("/player", playerRouter);
 appRouter.use("/match", matchRoutes);
 appRouter.use("/playermatch", playerMatchRoutes);
+appRouter.use("/teammatch", teamMatchRoutes);
 
 export default appRouter;

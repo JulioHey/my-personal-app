@@ -3,6 +3,7 @@ import { BaseEntity, Column, Entity, getRepository, OneToMany, PrimaryGeneratedC
 import { ChampionI } from "../../interfaces/game-interfaces/champion.interface";
 import RepoI from "../../interfaces/model.interface";
 import { PlayerMatchModel } from "./player-match.model";
+import { TeamMatchModel } from "./team-match.model";
 
 
 @injectable()
@@ -19,6 +20,24 @@ export default class ChampionModel extends BaseEntity implements ChampionI{
         playerMatch => playerMatch.championConnection
     )
     pickConnection: Promise<PlayerMatchModel[]>
+
+    @OneToMany(
+        () => TeamMatchModel,
+        playerMatch => playerMatch.firstBanConnection
+    )
+    firstBanConnection: Promise<TeamMatchModel[]>
+
+    @OneToMany(
+        () => TeamMatchModel,
+        playerMatch => playerMatch.secondBanConnection
+    )
+    secondBanConnection: Promise<TeamMatchModel[]>
+
+    @OneToMany(
+        () => TeamMatchModel,
+        playerMatch => playerMatch.thirdBanConnection
+    )
+    thirdBanConnection: Promise<TeamMatchModel[]>
 }
 
 @singleton()

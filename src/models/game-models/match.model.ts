@@ -4,6 +4,7 @@ import { MatchI } from "../../interfaces/game-interfaces/match.interface";
 import RepoI from "../../interfaces/model.interface";
 import { PlayerMatchModel } from "./player-match.model";
 import RoundModel from "./round.model";
+import { TeamMatchModel } from "./team-match.model";
 import TeamModel from "./team.model";
 
 
@@ -51,6 +52,12 @@ export class MatchModel extends BaseEntity implements MatchI{
         playerMatch => playerMatch.matchConnection
     )
     playerConnection: Promise<PlayerMatchModel[]>
+
+    @OneToMany(
+        () => TeamMatchModel,
+        teamMatch => teamMatch.matchConnection
+    )
+    teamConnection: Promise<TeamMatchModel[]>
 }
 
 @singleton()
