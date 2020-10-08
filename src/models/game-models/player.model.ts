@@ -1,8 +1,9 @@
 import { injectable, singleton } from "tsyringe";
-import { BaseEntity, Column, Entity, getRepository, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
+import { BaseEntity, Column, Entity, getRepository, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Repository } from "typeorm";
 import RepoI from "../../interfaces/model.interface";
 import { PlayerI } from "../../interfaces/game-interfaces/player.interface";
 import TeamModel from "./team.model";
+import { PlayerMatchModel } from "./player-match.model";
 
 
 @injectable()
@@ -27,6 +28,12 @@ export default class PlayerModel extends BaseEntity implements PlayerI{
     )
     @JoinColumn({  name: 'playerTeam_id' })
     teamConnection: Promise<TeamModel>;
+
+    @OneToMany(
+        () => PlayerMatchModel,
+        playerMatch => playerMatch.playerConnection
+    )
+    matchConnection: Promise<PlayerMatchModel[]>
 }
 
 @singleton()

@@ -8,4 +8,5 @@ export default class RoundController extends BaseController {
     constructor(@inject(delay(() => RoundService)) public RoundService: RoundService) {
         super(RoundService)
     }
+
 }
