@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { container } from "tsyringe";
-import PlayerController from "../../controllers/game-controllers/player.controller";
+import {PlayerController} from "../../controllers/game-controllers/player.controller";
 
 
-const playerRoutes = Router();
+const playerRouter = Router();
 const playerController = container.resolve(PlayerController);
 
-playerRoutes.get("/", playerController.get);
-playerRoutes.get("/:id", playerController.getById);
-playerRoutes.post("/", playerController.post);
-playerRoutes.delete("/:id", playerController.remove);
+playerRouter.get("/", playerController.get);
+playerRouter.get("/:id", playerController.getById);
+playerRouter.post("/", playerController.post);
+playerRouter.delete("/:id", playerController.remove);
 
-export default playerRoutes;
+export {playerRouter};

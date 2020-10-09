@@ -1,6 +1,8 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
 export class teammatch1602198896641 implements MigrationInterface {
+    
+    
     private table = new Table({
         name: "team_matches",
         columns:[
@@ -21,7 +23,7 @@ export class teammatch1602198896641 implements MigrationInterface {
                 type: "integer",
                 isNullable: false,
             },
-            {
+            {  
                 name: "first_ban_id",
                 type: "integer",
                 isNullable: false,
@@ -38,9 +40,9 @@ export class teammatch1602198896641 implements MigrationInterface {
             },
             {
                 name: "match_status",
-                type: "varchar",
+                type: "enum",
                 isNullable: false,
-                enum: ["win", "lost", "future", "inGame"]
+                enum: ["win", "lost", "future", "inGame"],
             }
         ]
     })

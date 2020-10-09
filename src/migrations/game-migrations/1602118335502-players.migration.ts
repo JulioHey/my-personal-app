@@ -28,6 +28,16 @@ export class players1602118335502 implements MigrationInterface {
                 length: '10',
                 isNullable: false,
             },
+            {
+                name: 'player_value',
+                type: 'float',
+                isNullable: false,
+            },
+            {
+                name: 'player_nickname',
+                type: 'varchar',
+                isNullable: false,
+            },
         ]
     });
 

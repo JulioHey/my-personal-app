@@ -5,18 +5,21 @@ import {
 import { TeamI } from "../../interfaces/game-interfaces/team.interface";
 import {getRepository, Entity, PrimaryGeneratedColumn, Column, Repository, BaseEntity, OneToMany, JoinColumn} from 'typeorm';
 import RepoI from '../../interfaces/model.interface';
-import PlayerModel from './player.model';
+import {PlayerModel} from './player.model';
 import { MatchModel } from './match.model';
 import { TeamMatchModel } from './team-match.model';
 
 @injectable()
 @Entity({name: "teams"})
-export default class TeamModel extends BaseEntity implements TeamI{
+export class TeamModel extends BaseEntity implements TeamI{
     @PrimaryGeneratedColumn({name: "team_id"})
     teamId: number
 
     @Column({name: "team_name"})
     teamName: string
+
+    @Column({name:"team_position"})
+    teamPosition: number
     
     @OneToMany(
         () => PlayerModel,

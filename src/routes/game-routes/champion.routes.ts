@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { container } from "tsyringe";
-import ChampionController from "../../controllers/game-controllers/champion.controller";
+import {ChampionController} from "../../controllers/game-controllers/champion.controller";
 
 
-const championRoutes = Router();
+const championRouter = Router();
 const championController = container.resolve(ChampionController);
 
-championRoutes.get("/", championController.get);
-championRoutes.get("/:id", championController.getById);
-championRoutes.post("/", championController.post);
-championRoutes.delete("/:id", championController.remove);
+championRouter.get("/", championController.get);
+championRouter.get("/:id", championController.getById);
+championRouter.post("/", championController.post);
+championRouter.delete("/:id", championController.remove);
 
-export default championRoutes;
+export {championRouter};

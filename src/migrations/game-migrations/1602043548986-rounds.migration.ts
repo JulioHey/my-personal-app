@@ -12,10 +12,15 @@ export class rounds1602043548986 implements MigrationInterface {
                 generationStrategy: "increment",
             },
             {
-                name: "round_name",
+                name: "round_number",
                 type: "integer",
                 isNullable: false,
                 isUnique: true
+            },
+            {
+                name: "round_date",
+                type: "varchar",
+                isNullable: false,
             }
         ]
     })

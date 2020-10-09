@@ -6,6 +6,7 @@ export interface MatchI{
     blueSideTeam: number
     redSideTeam: number
     roundId: number
+    matchPosition: number
 }
 
-export default interface MatchSI extends ModelI{}
+export interface MatchSI extends ModelI{}

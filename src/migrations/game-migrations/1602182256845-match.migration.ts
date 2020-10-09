@@ -26,6 +26,11 @@ export class match1602182256845 implements MigrationInterface {
                 type: 'integer',
                 isNullable: false,
             },
+            {
+                name: 'match_position',
+                type: 'integer',
+                isNullable: false,
+            },
         ]
     });
 

@@ -9,12 +9,15 @@ import { MatchModel } from './match.model';
 
 @injectable()
 @Entity({name: "rounds"})
-export default class RoundModel extends BaseEntity implements RoundI{
+export class RoundModel extends BaseEntity implements RoundI{
     @PrimaryGeneratedColumn({name: "round_id"})
     roundId: number
 
-    @Column({name: "round_name"})
+    @Column({name: "round_number"})
     roundNumber: number
+
+    @Column({name: "round_date"})
+    roundDate: string
 
     @OneToMany(
         () => MatchModel,

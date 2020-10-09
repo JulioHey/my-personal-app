@@ -6,6 +6,8 @@ export interface PlayerI{
     playerId: number
     playerPosition: string
     playerTeamId: number
+    playerNickname: string
+    playerValue: number
 }
 
-export default interface PlayerSI extends ModelI{}
+export interface PlayerSI extends ModelI{}

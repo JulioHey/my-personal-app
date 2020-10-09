@@ -6,7 +6,7 @@ import BaseService from "../base.service";
 
 
 @injectable()
-export default class TeaMatchService extends BaseService<TeamMatchSI>{
+export class TeamMatchService extends BaseService<TeamMatchSI>{
     
     constructor(modelI?: TeamMatchRepo){
         super(modelI)

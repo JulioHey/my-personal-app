@@ -8,7 +8,7 @@ import { TeamMatchModel } from "./team-match.model";
 
 @injectable()
 @Entity({name: "champions"})
-export default class ChampionModel extends BaseEntity implements ChampionI{
+export class ChampionModel extends BaseEntity implements ChampionI{
     @PrimaryGeneratedColumn({name: "champion_id"})
     championId: number
 

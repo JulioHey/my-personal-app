@@ -1,10 +1,11 @@
 import { injectable, singleton } from "tsyringe";
-import { BaseEntity, Column, Entity, getRepository, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
+import { BaseEntity, Column, Entity, getRepository, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
 import { PlayerMatchI } from "../../interfaces/game-interfaces/player-match.interface";
 import RepoI from "../../interfaces/model.interface";
-import ChampionModel from "./champion.model";
+import {ChampionModel} from "./champion.model";
 import { MatchModel } from "./match.model";
-import PlayerModel from "./player.model";
+import { PlayerStatusModel } from "./player-status.model";
+import {PlayerModel} from "./player.model";
 
 
 @injectable()
@@ -38,7 +39,7 @@ export class PlayerMatchModel extends BaseEntity implements PlayerMatchI{
         champion => champion.pickConnection,
         { primary: true },
     )
-    @JoinColumn({  name: 'player_id' })
+    @JoinColumn({  name: 'champion_id' })
     championConnection: Promise<ChampionModel>;
 
     
@@ -47,8 +48,15 @@ export class PlayerMatchModel extends BaseEntity implements PlayerMatchI{
         match => match.playerConnection,
         { primary: true },
     )
-    @JoinColumn({  name: 'player_id' })
+    @JoinColumn({  name: 'match_id' })
     matchConnection: Promise<MatchModel>;
+
+    @OneToOne(
+        () => PlayerStatusModel,
+        match => match.playerConnection,
+        { primary: true },
+    )
+    statusConnection: Promise<PlayerStatusModel>;
 }
 
 @singleton()

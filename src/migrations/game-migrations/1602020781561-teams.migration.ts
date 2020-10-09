@@ -16,8 +16,13 @@ export class teams1602020781561 implements MigrationInterface {
                 type: "varchar",
                 isNullable: false,
                 isUnique: true
+            },
+            {
+                name: "team_position",
+                type: "integer",
+                isNullable: false,
             }
-        ]
+        ]                 
     })
 
     public async up(queryRunner: QueryRunner): Promise<void> {

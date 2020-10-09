@@ -3,9 +3,9 @@ import { BaseEntity, Column, Entity, getRepository, JoinColumn, ManyToOne, OneTo
 import { MatchI } from "../../interfaces/game-interfaces/match.interface";
 import RepoI from "../../interfaces/model.interface";
 import { PlayerMatchModel } from "./player-match.model";
-import RoundModel from "./round.model";
+import {RoundModel} from "./round.model";
 import { TeamMatchModel } from "./team-match.model";
-import TeamModel from "./team.model";
+import {TeamModel} from "./team.model";
 
 
 @injectable()
@@ -22,6 +22,9 @@ export class MatchModel extends BaseEntity implements MatchI{
 
     @Column({name: "round_id"})
     roundId: number;
+
+    @Column({name: "match_position" })
+    matchPosition: number
 
     @ManyToOne(
         () => TeamModel,

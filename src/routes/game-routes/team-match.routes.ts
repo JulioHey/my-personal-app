@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { container } from "tsyringe";
-import TeamMatchController from "../../controllers/game-controllers/team-match.controller";
+import {TeamMatchController} from "../../controllers/game-controllers/team-match.controller";
 
 
 const teamMatchRouter = Router();
@@ -11,4 +11,4 @@ teamMatchRouter.get("/:id", teamMatchController.getById);
 teamMatchRouter.post("/", teamMatchController.post);
 teamMatchRouter.delete("/:id", teamMatchController.remove);
 
-export default teamMatchRouter;
+export {teamMatchRouter};

@@ -1,10 +1,10 @@
 import { injectable, singleton } from "tsyringe";
 import { BaseEntity, Column, Entity, getRepository, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
-import { TeamMatchI } from "../../interfaces/game-interfaces/team-match.interface";
+import { TeamMatchI, Status } from "../../interfaces/game-interfaces/team-match.interface";
 import RepoI from "../../interfaces/model.interface";
-import ChampionModel from "./champion.model";
+import {ChampionModel} from "./champion.model";
 import { MatchModel } from "./match.model";
-import TeamModel from "./team.model";
+import {TeamModel} from "./team.model";
 
 
 @injectable()
@@ -28,8 +28,12 @@ class TeamMatchModel extends BaseEntity implements TeamMatchI{
     @Column({name: "third_ban_id"})
     thirdBan: number;
 
-    @Column({name: "match_status"})
-    matchStatus: string;
+    @Column({
+        name: "match_status",
+        enum: Status,
+        default: [Status.futute]
+    })
+    matchStatus: Status;
 
     @ManyToOne(
         () => TeamModel,

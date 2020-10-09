@@ -1,16 +1,20 @@
 import { ModelI } from "../model.interface";
 
+export enum Status {
+    "inGame",
+    "futute",
+    "win",
+    "lost"
+}
 
-interface TeamMatchI{
+export interface TeamMatchI{
     teamMatchId: number
     teamId: number
     matchId: number
     firstBan: number
     secondBan: number
     thirdBan: number
-    matchStatus: string
+    matchStatus: Status
 }
 
-interface TeamMatchSI extends ModelI{}
-
-export {TeamMatchI, TeamMatchSI}
+export interface TeamMatchSI extends ModelI{}

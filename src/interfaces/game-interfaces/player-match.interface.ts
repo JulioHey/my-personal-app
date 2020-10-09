@@ -9,4 +9,4 @@ export interface PlayerMatchI {
     playerPoints: number
 }
 
-export default interface PlayerMatchSI extends ModelI{}
+export interface PlayerMatchSI extends ModelI{}

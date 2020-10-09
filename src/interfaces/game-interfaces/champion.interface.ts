@@ -6,4 +6,4 @@ export interface ChampionI{
     championId: number
 }
 
-export default interface ChampionSI extends ModelI{}
+export interface ChampionSI extends ModelI{}
