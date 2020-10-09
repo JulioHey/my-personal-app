@@ -1,13 +1,16 @@
 TODO:
 
-Organizate all files in the context they need
+    -- Organizate all files in the context they need;
 
-Add all GameEntities
+    -- Add all GameEntities;
+        -- Review all entities, and column names;
+        -- Implement uuid;
+        -- Implement changes;
 
-    --Review all entities, column names, add collumns needed and implement businessRules
+    -- Add all UserEntities;
 
-Add all UserEntities
-
-Add all AppEntities
-
-Get middleware, with jsonwebtoken and bycript
+    -- Add all AppEntities;
+    
+    -- Implement Authentication;
+        -- Add admin middlewares;
+        -- User authentication to edit their rows;
