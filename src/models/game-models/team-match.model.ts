@@ -1,9 +1,11 @@
 import { injectable, singleton } from "tsyringe";
-import { BaseEntity, Column, Entity, getRepository, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
+import { BaseEntity, Column, Entity, getRepository, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
 import { TeamMatchI, Status } from "../../interfaces/game-interfaces/team-match.interface";
 import RepoI from "../../interfaces/model.interface";
 import {ChampionModel} from "./champion.model";
 import { MatchModel } from "./match.model";
+import { TeamDragonModel } from "./team-dragon.model";
+import { TeamStatusModel } from "./team-status.model";
 import {TeamModel} from "./team.model";
 
 
@@ -74,6 +76,18 @@ class TeamMatchModel extends BaseEntity implements TeamMatchI{
     )
     @JoinColumn({  name: 'third_ban_id' })
     thirdBanConnection: Promise<ChampionModel>;
+
+    @OneToOne(
+        () => TeamStatusModel,
+        teamStatus => teamStatus.teamConnection
+    )
+    statusConnection: Promise<TeamStatusModel>
+
+    @OneToOne(
+        () => TeamDragonModel,
+        teamStatus => teamStatus.teamConnection
+    )
+    dragonConnection: Promise<TeamDragonModel>
 }
 
 @singleton()

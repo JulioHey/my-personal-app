@@ -12,7 +12,7 @@ TODO:
         -- [x] TeamMatch
         -- [x] MatchDragons
         -- [x] PlayerStatus
-        -- [] TeamStatus
+        -- [x] TeamStatus
         -- [] TeamDragons
 
 
