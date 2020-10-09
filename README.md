@@ -10,13 +10,18 @@ TODO:
         -- [x] Match
         -- [x] PLayerMatch
         -- [x] TeamMatch
-        -- [] MatchDragons
+        -- [x] MatchDragons
         -- [x] PlayerStatus
         -- [] TeamStatus
         -- [] TeamDragons
 
 
     -- [] Add all UserEntities;
+        -- [] Users
+        -- [] Roles
+        -- [] UerRole
+        -- [] Permission
+        -- [] PermissionRoles
 
     -- [] Add all AppEntities;
     

@@ -7,4 +7,4 @@ export interface TeamI{
     teamPosition: number
 }
 
-export interface TeamSI extends ModelI{}
+export interface TeamSI extends TeamI, ModelI{}
