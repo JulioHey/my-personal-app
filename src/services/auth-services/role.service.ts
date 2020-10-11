@@ -11,4 +11,10 @@ export class RoleService extends BaseService<RoleSI>{
     constructor(modelI?: RoleRepo){
         super(modelI)
     }
+
+    asd = async() => {
+        const dale = await this.model.repo.find()
+
+        dale[0].permission;
+    }
 }
