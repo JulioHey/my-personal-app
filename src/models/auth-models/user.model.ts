@@ -1,8 +1,9 @@
 import { injectable, singleton } from "tsyringe";
-import { BaseEntity, Column, Entity, getRepository, OneToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
+import { BaseEntity, Column, Entity, getRepository, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
 import { UserI } from "../../interfaces/auth-interfaces/user.interface";
 import RepoI from "../../interfaces/model.interface";
 import { PasswordModel } from "./password.model";
+import { RoleModel } from "./role.model";
 
 
 @injectable()
@@ -21,7 +22,15 @@ export class UserModel extends BaseEntity implements UserI{
         () => PasswordModel,
         password => password.userConnection
     )
-    passwordConnection: Promise<PasswordModel>
+    passwordConnection: Promise<PasswordModel>;
+
+    @ManyToMany(() => RoleModel)
+    @JoinTable({
+        name: "user_roles",
+        inverseJoinColumns: [{name: 'role_id'}],
+        joinColumns: [{ name:'user_id'}],
+    })
+    roles: RoleModel[];
 }
 
 @singleton()

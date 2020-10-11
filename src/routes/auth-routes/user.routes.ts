@@ -3,8 +3,8 @@ import {UserController} from '../../controllers/auth-controllers/user.controller
 import {LoginController} from '../../controllers/auth-controllers/login.controller';
 import { container } from 'tsyringe';
 
-const loginController = container.resolve(LoginController)
-const userController = container.resolve(UserController)
+const loginController = container.resolve(LoginController);
+const userController = container.resolve(UserController);
 const userRouter = Router();
 
 userRouter.get("/", userController.get);

@@ -12,7 +12,6 @@ export class LoginController extends BaseController {
 
     create =  async(request: Request, response: Response) => {
         try {
-
             const User = await this.UserPasswordService.create(request.body);
 
             return response.json(User)

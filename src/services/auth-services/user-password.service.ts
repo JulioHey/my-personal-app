@@ -17,14 +17,12 @@ export class UserPasswordService extends BaseService<UserSI>{
         this.password = container.resolve(PasswordService)
     }
 
-    create = async (data: {userName: string, userEmail: string, userPassword: string}) => {
-        const {userName, userPassword, userEmail} = data;
-        console.log(userEmail)
-        console.log(userPassword)
-
+    create = async (data: {userName: string, userEmail: string, userPassword: string, roles: string[]}) => {
+        const {userName, userPassword, userEmail, roles} = data;
         const userModel = {
             userName: userName,
-            userEmail: userEmail
+            userEmail: userEmail,
+            roles: roles
         }
 
         const newUser = await this.user.post(userModel)
