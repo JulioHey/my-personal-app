@@ -1,3 +1,4 @@
+import { PrimaryExpression } from "typescript";
 import RepoI from "../interfaces/model.interface";
 
 
@@ -8,7 +9,7 @@ export default class BaseService<T>{
     }
 
     post = async (data: T) => {
-        const resource = this.model.repo.create(data)
+        const resource = await this.model.repo.create(data)
         await this.model.repo.save(resource)
         return resource
     }

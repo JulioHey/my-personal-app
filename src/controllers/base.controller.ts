@@ -12,7 +12,7 @@ export default class BaseController{
     post = async(req: Request, res: Response) => {
         try {
             const resource = await this.service.post(req.body)
-            return res.send(resource)
+            return res.send(resource);
         } catch(err){
             return res.json(err)
         }

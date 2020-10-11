@@ -10,6 +10,7 @@ import {playerStatusRouter} from "./routes/game-routes/player-status.routes";
 import {matchDragonRouter} from './routes/game-routes/match-dragon.routes';
 import {teamStatusRouter} from './routes/game-routes/team-status.routes';
 import {teamDragonRouter} from "./routes/game-routes/team-dragon.routes";
+import {userRouter} from "./routes/auth-routes/user.routes";
 
 
 const appRouter = Router();
@@ -23,7 +24,8 @@ appRouter.use("/playermatch", playerMatchRouter);
 appRouter.use("/teammatch", teamMatchRouter);
 appRouter.use('/playerstatus', playerStatusRouter);
 appRouter.use("/matchdragon", matchDragonRouter);
-appRouter.use("/teamstatus", teamStatusRouter)
-appRouter.use("/teamdragon", teamDragonRouter)
+appRouter.use("/teamstatus", teamStatusRouter);
+appRouter.use("/teamdragon", teamDragonRouter);
+appRouter.use("/user", userRouter);
 
 export default appRouter;
