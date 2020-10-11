@@ -18,10 +18,10 @@ TODO:
 
     -- [] Add all UserEntities;
         -- [x] Users
-        -- [] Roles
-        -- [] UerRole
+        -- [x] Roles
+        -- [x] UerRole
         -- [x] Permission
-        -- [] PermissionRoles
+        -- [x] PermissionRoles
         -- [x] Password
 
         -- [x] Login and Creation of User
