@@ -50,13 +50,13 @@ export class UserPasswordController {
     login = async (request: Request, response: Response) => {
         try {
             const {
-                userName,
+                userEmail,
                 userPassword
             } = request.body
 
-            const User = await this.user.service.get({userName});
+            const User = await this.user.service.get({userEmail});
 
-            const userId = User[3].userId
+            const userId = User[0].userId
 
             const {password} = await this.password.service.getById(userId)
 

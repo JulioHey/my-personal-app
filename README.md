@@ -20,7 +20,7 @@ TODO:
         -- [x] Users
         -- [] Roles
         -- [] UerRole
-        -- [] Permission
+        -- [x] Permission
         -- [] PermissionRoles
         -- [x] Password
 
