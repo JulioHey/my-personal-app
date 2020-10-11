@@ -1,16 +1,16 @@
 import { Router } from 'express';
-import {UserPasswordController} from '../../controllers/auth-controllers/user_password.controller';
 import {UserController} from '../../controllers/auth-controllers/user.controller';
+import {LoginController} from '../../controllers/auth-controllers/login.controller';
 import { container } from 'tsyringe';
 
-const userPasswordController = new UserPasswordController();
+const loginController = container.resolve(LoginController)
 const userController = container.resolve(UserController)
 const userRouter = Router();
 
 userRouter.get("/", userController.get);
 userRouter.get("/:id", userController.getById);
-userRouter.post("/", userPasswordController.post);
-userRouter.post("/login", userPasswordController.login);
+userRouter.post("/", loginController.create);
+userRouter.post("/login", loginController.login);
 userRouter.delete("/:id", userController.remove);
 
 export {userRouter};

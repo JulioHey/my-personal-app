@@ -12,6 +12,7 @@ import {teamStatusRouter} from './routes/game-routes/team-status.routes';
 import {teamDragonRouter} from "./routes/game-routes/team-dragon.routes";
 import {userRouter} from "./routes/auth-routes/user.routes";
 import {permissionRouter} from './routes/auth-routes/permission.routes';
+import {roleRouter} from "./routes/auth-routes/role.routes";
 
 
 const appRouter = Router();
@@ -29,5 +30,6 @@ appRouter.use("/teamstatus", teamStatusRouter);
 appRouter.use("/teamdragon", teamDragonRouter);
 appRouter.use("/user", userRouter);
 appRouter.use("/permission", permissionRouter);
+appRouter.use("/role", roleRouter);
 
 export default appRouter;
