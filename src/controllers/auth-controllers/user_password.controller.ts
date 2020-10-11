@@ -14,7 +14,11 @@ export class UserPasswordController {
 
     post = async (request: Request, response: Response) => {
         try {
-            const {userName, userEmail, password} = request.body
+            const {
+                userName,
+                userEmail,
+                password
+            } = request.body
 
             const userModel = {
                 userName,
@@ -37,6 +41,33 @@ export class UserPasswordController {
             const newUserPassword = await this.password.PasswordService.post(passwordModel);
 
             return response.json({newUser, newUserPassword})
+        } catch(error) {
+            return response.json(error)
+        }
+    };
+
+
+    login = async (request: Request, response: Response) => {
+        try {
+            const {
+                userName,
+                userPassword
+            } = request.body
+
+            const User = await this.user.service.get({userName});
+
+            const userId = User[3].userId
+
+            const {password} = await this.password.service.getById(userId)
+
+            if (password === userPassword) {
+                return response.json({login:"succes"})
+
+            } else {
+                return response.json({login:"fail"})
+
+            }
+
         } catch(error) {
             return response.json(error)
         }

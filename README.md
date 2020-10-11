@@ -2,7 +2,7 @@ TODO:
 
     -- [] Organizate all files in the context they need;
 
-    -- [] Add all GameEntities;
+    -- [x] Add all GameEntities;
         -- [x] Team
         -- [x] Player
         -- [x] Champion
@@ -13,15 +13,20 @@ TODO:
         -- [x] MatchDragons
         -- [x] PlayerStatus
         -- [x] TeamStatus
-        -- [] TeamDragons
+        -- [x] TeamDragons
 
 
     -- [] Add all UserEntities;
-        -- [] Users
+        -- [x] Users
         -- [] Roles
         -- [] UerRole
         -- [] Permission
         -- [] PermissionRoles
+        -- [x] Password
+
+        -- [x] Login and Creation of User
+        -- [] Add crypto to password
+        -- [] Reorganizate routes
 
     -- [] Add all AppEntities;
     

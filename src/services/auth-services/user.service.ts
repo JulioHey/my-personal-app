@@ -11,4 +11,5 @@ export class UserService extends BaseService<UserSI>{
     constructor(modelI?: UserRepo){
         super(modelI)
     }
+
 }

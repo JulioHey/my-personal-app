@@ -10,6 +10,7 @@ const userRouter = Router();
 userRouter.get("/", userController.get);
 userRouter.get("/:id", userController.getById);
 userRouter.post("/", userPasswordController.post);
+userRouter.post("/login", userPasswordController.login);
 userRouter.delete("/:id", userController.remove);
 
 export {userRouter};
