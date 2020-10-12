@@ -29,6 +29,11 @@ TODO:
         -- [x] Doesnt allow creating repetead userEmails;
         -- [] Reorganizate routes
 
+        -- [] Implement Authentication;
+            -- [x] Add admin middlewares;
+            -- [] User authentication to edit their rows;
+            -- [] Organizate routes;
+
     -- [] Add all AppEntities;
     
     -- [] Review all entities, and column names;
@@ -36,7 +41,3 @@ TODO:
     -- [] Implement changes;
     -- [] Dont use default export, just for base classes;
 
-    -- [] Implement Authentication;
-        -- [] Add admin middlewares;
-        -- [] User authentication to edit their rows;
-        -- [] Organizate routes;

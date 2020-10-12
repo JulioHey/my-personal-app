@@ -13,11 +13,12 @@ import {teamDragonRouter} from "./routes/game-routes/team-dragon.routes";
 import {userRouter} from "./routes/auth-routes/user.routes";
 import {permissionRouter} from './routes/auth-routes/permission.routes';
 import {roleRouter} from "./routes/auth-routes/role.routes";
+import { is } from "./middleware/permission";
 
 
 const appRouter = Router();
 
-appRouter.use("/round", roundRouter);
+appRouter.use("/round", is(["Admin"]) ,roundRouter);
 appRouter.use("/team", teamRouter);
 appRouter.use("/champion", championRouter);
 appRouter.use("/player", playerRouter);

@@ -3,6 +3,7 @@ import { autoInjectable, delay, inject } from "tsyringe";
 import {UserPasswordService} from "../../services/auth-services/user-password.service";
 import BaseController from "../base.controller";
 import {hash} from 'bcryptjs';
+import { sign } from "jsonwebtoken";
 
 @autoInjectable()
 export class LoginController extends BaseController {
@@ -29,6 +30,7 @@ export class LoginController extends BaseController {
 
             const User = await this.UserPasswordService.create(data);
 
+
             return response.json(User)
         } catch(error) {
             return response.json(error)
@@ -42,7 +44,12 @@ export class LoginController extends BaseController {
 
             const User = await this.UserPasswordService.login(userName, userPassword);
 
-            return response.json(User)
+            const token = sign({}, "07e61acbf651a52f6e9e21e81f7bed82", {
+                subject: User.userId,
+                expiresIn: '1d'
+            });
+
+            return response.json({User, token})
         } catch(err) {
             return response.json(err)
         }

@@ -27,7 +27,8 @@ export class UserPasswordService extends BaseService<UserSI>{
         }
 
         const User = await this.user.get({userName: userName})
-        if (User) {
+        if (User[0]) {
+            console.log(User)
             return {Error: "user already exist"}
         }
 
@@ -52,13 +53,12 @@ export class UserPasswordService extends BaseService<UserSI>{
         const userId = User[0].userId;
 
         const Passwords = await this.password.get({userId: userId})
-        console.log(Passwords)
 
         const matchPassword = await compare(userPassword, Passwords[0].password)
         console.log(matchPassword)
 
         if (matchPassword) {
-            return User
+            return User[0]
         } else {
             return {error: "LoginFailed"}
         }
