@@ -1,3 +1,4 @@
+import { compare } from "bcryptjs";
 import { autoInjectable, container, injectable } from "tsyringe";
 import { UserSI } from "../../interfaces/auth-interfaces/user.interface";
 import { UserRepo } from "../../models/auth-models/user.model";
@@ -25,6 +26,11 @@ export class UserPasswordService extends BaseService<UserSI>{
             roles: roles
         }
 
+        const User = await this.user.get({userName: userName})
+        if (User) {
+            return {Error: "user already exist"}
+        }
+
         const newUser = await this.user.post(userModel)
 
         console.log(newUser)
@@ -46,8 +52,12 @@ export class UserPasswordService extends BaseService<UserSI>{
         const userId = User[0].userId;
 
         const Passwords = await this.password.get({userId: userId})
+        console.log(Passwords)
 
-        if (Passwords[0].password === userPassword) {
+        const matchPassword = await compare(userPassword, Passwords[0].password)
+        console.log(matchPassword)
+
+        if (matchPassword) {
             return User
         } else {
             return {error: "LoginFailed"}

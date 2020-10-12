@@ -24,8 +24,9 @@ TODO:
         -- [x] PermissionRoles
         -- [x] Password
 
-        -- [x] Login and Creation of User
-        -- [] Add crypto to password
+        -- [x] Login and Creation of User 
+        -- [x] Add crypto to password
+        -- [x] Doesnt allow creating repetead userEmails;
         -- [] Reorganizate routes
 
     -- [] Add all AppEntities;
