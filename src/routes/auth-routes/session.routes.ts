@@ -5,12 +5,12 @@ import { container } from 'tsyringe';
 
 const loginController = container.resolve(LoginController);
 const userController = container.resolve(UserController);
-const userRouter = Router();
+const sessionRouter = Router();
 
-userRouter.get("/", userController.get);
-userRouter.get("/:id", userController.getById);
-userRouter.post("/", loginController.create);
-userRouter.post("/login", loginController.login);
-userRouter.delete("/:id", userController.remove);
+sessionRouter.get("/", userController.get);
+sessionRouter.get("/:id", userController.getById);
+sessionRouter.post("/", loginController.create);
+sessionRouter.post("/login", loginController.login);
+sessionRouter.delete("/:id", userController.remove);
 
-export {userRouter};
+export {sessionRouter};

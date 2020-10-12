@@ -1,36 +1,16 @@
 import { Router } from "express";
-import {teamRouter} from "./routes/game-routes/team.routes";
-import {roundRouter} from "./routes/game-routes/round.routes";
-import {championRouter} from "./routes/game-routes/champion.routes";
-import {playerRouter} from './routes/game-routes/player.routes';
-import {matchRouter} from './routes/game-routes/match.routes';
-import {playerMatchRouter} from './routes/game-routes/player-match.routes';
-import {teamMatchRouter} from './routes/game-routes/team-match.routes';
-import {playerStatusRouter} from "./routes/game-routes/player-status.routes";
-import {matchDragonRouter} from './routes/game-routes/match-dragon.routes';
-import {teamStatusRouter} from './routes/game-routes/team-status.routes';
-import {teamDragonRouter} from "./routes/game-routes/team-dragon.routes";
-import {userRouter} from "./routes/auth-routes/user.routes";
+import {sessionRouter} from "./routes/auth-routes/session.routes";
 import {permissionRouter} from './routes/auth-routes/permission.routes';
 import {roleRouter} from "./routes/auth-routes/role.routes";
-import { is } from "./middleware/permission";
-
+import { adminRouter } from "./routes/admin.routes";
+import { userRouter } from "./routes/user.routes";
 
 const appRouter = Router();
 
-appRouter.use("/round", is(["Admin"]) ,roundRouter);
-appRouter.use("/team", teamRouter);
-appRouter.use("/champion", championRouter);
-appRouter.use("/player", playerRouter);
-appRouter.use("/match", matchRouter);
-appRouter.use("/playermatch", playerMatchRouter);
-appRouter.use("/teammatch", teamMatchRouter);
-appRouter.use('/playerstatus', playerStatusRouter);
-appRouter.use("/matchdragon", matchDragonRouter);
-appRouter.use("/teamstatus", teamStatusRouter);
-appRouter.use("/teamdragon", teamDragonRouter);
 appRouter.use("/user", userRouter);
 appRouter.use("/permission", permissionRouter);
 appRouter.use("/role", roleRouter);
+appRouter.use("/", adminRouter);
+appRouter.use("/", userRouter);
 
 export default appRouter;

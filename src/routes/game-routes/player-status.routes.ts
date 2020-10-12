@@ -3,12 +3,13 @@ import { container } from "tsyringe";
 import {PlayerStatusController} from "../../controllers/game-controllers/player-status.controller";
 
 
-const playerStatusRouter = Router();
+const playerStatusAdminRouter = Router();
+const playerStatusUserRouter = Router();
 const playerStatusController = container.resolve(PlayerStatusController);
 
-playerStatusRouter.get("/", playerStatusController.get);
-playerStatusRouter.get("/:id", playerStatusController.getById);
-playerStatusRouter.post("/", playerStatusController.post);
-playerStatusRouter.delete("/:id", playerStatusController.remove);
+playerStatusUserRouter.get("/", playerStatusController.get);
+playerStatusUserRouter.get("/:id", playerStatusController.getById);
+playerStatusAdminRouter.post("/", playerStatusController.post);
+playerStatusAdminRouter.delete("/:id", playerStatusController.remove);
 
-export {playerStatusRouter};
+export {playerStatusAdminRouter, playerStatusUserRouter};

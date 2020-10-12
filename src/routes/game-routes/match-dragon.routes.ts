@@ -3,12 +3,13 @@ import { container } from "tsyringe";
 import {MatchDragonController} from "../../controllers/game-controllers/match-dragon.controller";
 
 
-const matchDragonRouter = Router();
+const matchDragonUserRouter = Router();
+const matchDragonAdminRouter = Router();
 const matchDragonController = container.resolve(MatchDragonController);
 
-matchDragonRouter.get("/", matchDragonController.get);
-matchDragonRouter.get("/:id", matchDragonController.getById);
-matchDragonRouter.post("/", matchDragonController.post);
-matchDragonRouter.delete("/:id", matchDragonController.remove);
+matchDragonUserRouter.get("/", matchDragonController.get);
+matchDragonUserRouter.get("/:id", matchDragonController.getById);
+matchDragonAdminRouter.post("/", matchDragonController.post);
+matchDragonAdminRouter.delete("/:id", matchDragonController.remove);
 
-export {matchDragonRouter};
+export {matchDragonUserRouter, matchDragonAdminRouter};

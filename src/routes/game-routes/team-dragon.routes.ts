@@ -3,12 +3,13 @@ import { container } from "tsyringe";
 import {TeamDragonController} from "../../controllers/game-controllers/team-dragon.controller";
 
 
-const teamDragonRouter = Router();
+const teamDragonUserRouter = Router();
+const teamDragonAdminRouter = Router();
 const teamDragonController = container.resolve(TeamDragonController);
 
-teamDragonRouter.get("/", teamDragonController.get);
-teamDragonRouter.get("/:id", teamDragonController.getById);
-teamDragonRouter.post("/", teamDragonController.post);
-teamDragonRouter.delete("/:id", teamDragonController.remove);
+teamDragonUserRouter.get("/", teamDragonController.get);
+teamDragonUserRouter.get("/:id", teamDragonController.getById);
+teamDragonAdminRouter.post("/", teamDragonController.post);
+teamDragonAdminRouter.delete("/:id", teamDragonController.remove);
 
-export {teamDragonRouter};
+export {teamDragonUserRouter, teamDragonAdminRouter};

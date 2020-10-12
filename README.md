@@ -27,17 +27,16 @@ TODO:
         -- [x] Login and Creation of User 
         -- [x] Add crypto to password
         -- [x] Doesnt allow creating repetead userEmails;
-        -- [] Reorganizate routes
+        -- [x] Reorganizate routes
 
         -- [] Implement Authentication;
             -- [x] Add admin middlewares;
             -- [] User authentication to edit their rows;
-            -- [] Organizate routes;
 
     -- [] Add all AppEntities;
     
     -- [] Review all entities, and column names;
-    -- [] Implement uuid;
+    -- [x] Implement uuid;
     -- [] Implement changes;
-    -- [] Dont use default export, just for base classes;
+    -- [x] Dont use default export, just for base classes;
 

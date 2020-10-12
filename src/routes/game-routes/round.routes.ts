@@ -3,12 +3,13 @@ import { container } from "tsyringe";
 import {RoundController} from "../../controllers/game-controllers/round.controller";
 
 
-const roundRouter = Router();
+const roundUserRouter = Router();
+const roundAdminRouter = Router();
 const roundController = container.resolve(RoundController);
 
-roundRouter.get("/", roundController.get);
-roundRouter.get("/:id", roundController.getById);
-roundRouter.post("/", roundController.post);
-roundRouter.delete("/:id", roundController.remove);
+roundUserRouter.get("/", roundController.get);
+roundUserRouter.get("/:id", roundController.getById);
+roundAdminRouter.post("/", roundController.post);
+roundAdminRouter.delete("/:id", roundController.remove);
 
-export {roundRouter};
+export {roundUserRouter, roundAdminRouter};
