@@ -16,7 +16,7 @@ TODO:
         -- [x] TeamDragons
 
 
-    -- [] Add all UserEntities;
+    -- [x] Add all UserEntities;
         -- [x] Users
         -- [x] Roles
         -- [x] UerRole
@@ -29,10 +29,6 @@ TODO:
         -- [x] Doesnt allow creating repetead userEmails;
         -- [x] Reorganizate routes
 
-        -- [] Implement Authentication;
-            -- [x] Add admin middlewares;
-            -- [] User authentication to edit their rows;
-
     -- [] Add all AppEntities;
     
     -- [] Review all entities, and column names;
@@ -40,3 +36,6 @@ TODO:
     -- [] Implement changes;
     -- [x] Dont use default export, just for base classes;
 
+    -- [] Implement Authentication;
+        -- [x] Add admin middlewares;
+        -- [] User authentication to edit their rows;

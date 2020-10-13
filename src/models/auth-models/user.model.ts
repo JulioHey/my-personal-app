@@ -2,6 +2,7 @@ import { injectable, singleton } from "tsyringe";
 import { BaseEntity, Column, Entity, getRepository, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
 import { UserI } from "../../interfaces/auth-interfaces/user.interface";
 import RepoI from "../../interfaces/model.interface";
+import { UserTeamModel } from "../app-models/user-team.model";
 import { PasswordModel } from "./password.model";
 import { RoleModel } from "./role.model";
 
@@ -23,6 +24,13 @@ export class UserModel extends BaseEntity implements UserI{
         password => password.userConnection
     )
     passwordConnection: Promise<PasswordModel>;
+
+    
+    @OneToOne(
+        () => UserTeamModel,
+        userTeam => userTeam.userConnection
+    )
+    teamConnection: Promise<UserTeamModel>;
 
     @ManyToMany(() => RoleModel)
     @JoinTable({

@@ -4,10 +4,12 @@ import {permissionRouter} from './routes/auth-routes/permission.routes';
 import {roleRouter} from "./routes/auth-routes/role.routes";
 import { adminRouter } from "./routes/admin.routes";
 import { userRouter } from "./routes/user.routes";
+import { userTeamRouter } from "./routes/app-routes/user-team.routes";
 
 const appRouter = Router();
 
-appRouter.use("/user", userRouter);
+appRouter.use("/userteam", userTeamRouter);
+appRouter.use("/user", sessionRouter);
 appRouter.use("/permission", permissionRouter);
 appRouter.use("/role", roleRouter);
 appRouter.use("/", adminRouter);
