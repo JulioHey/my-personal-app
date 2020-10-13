@@ -6,6 +6,7 @@ import { RoundI } from "../../interfaces/game-interfaces/round.interface";
 import {getRepository, Entity, PrimaryGeneratedColumn, Column, Repository, BaseEntity, OneToMany} from 'typeorm';
 import RepoI from '../../interfaces/model.interface';
 import { MatchModel } from './match.model';
+import { UserEscalationModel } from '../app-models/user-escalation.model';
 
 @injectable()
 @Entity({name: "rounds"})
@@ -24,6 +25,13 @@ export class RoundModel extends BaseEntity implements RoundI{
         match => match.roundConnection
     )
     matchConnection: Promise<MatchModel[]>
+
+    
+    @OneToMany(
+        () => UserEscalationModel,
+        escalation => escalation.roundConnection
+    )
+    escalationConnection: Promise<UserEscalationModel[]>
 
 }
 

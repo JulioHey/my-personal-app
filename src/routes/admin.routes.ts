@@ -15,7 +15,7 @@ import {teamDragonAdminRouter} from "./game-routes/team-dragon.routes";
 
 
 const adminRouter = Router();
-adminRouter.use(is(["Admin"]));
+// adminRouter.use(is(["Admin"]));
 
 adminRouter.use("/round", roundAdminRouter)
 adminRouter.use("/team", teamAdminRouter);

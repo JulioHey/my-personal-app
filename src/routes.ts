@@ -5,9 +5,11 @@ import {roleRouter} from "./routes/auth-routes/role.routes";
 import { adminRouter } from "./routes/admin.routes";
 import { userRouter } from "./routes/user.routes";
 import { userTeamRouter } from "./routes/app-routes/user-team.routes";
+import { userEscalationRouter } from "./routes/app-routes/user-escalation.routes";
 
 const appRouter = Router();
 
+appRouter.use("/userescalation", userEscalationRouter);
 appRouter.use("/userteam", userTeamRouter);
 appRouter.use("/user", sessionRouter);
 appRouter.use("/permission", permissionRouter);

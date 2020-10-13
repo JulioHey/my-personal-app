@@ -15,7 +15,7 @@ import {teamDragonUserRouter} from "./game-routes/team-dragon.routes";
 
 
 const userRouter = Router();
-userRouter.use(is(["User", "Admin"]));
+// userRouter.use(is(["User", "Admin"]));
 
 userRouter.use("/round", roundUserRouter)
 userRouter.use("/team", teamUserRouter);

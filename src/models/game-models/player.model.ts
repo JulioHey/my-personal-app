@@ -4,6 +4,7 @@ import RepoI from "../../interfaces/model.interface";
 import { PlayerI } from "../../interfaces/game-interfaces/player.interface";
 import {TeamModel} from "./team.model";
 import { PlayerMatchModel } from "./player-match.model";
+import { UserEscalationModel } from "../app-models/user-escalation.model";
 
 
 @injectable()
@@ -40,6 +41,43 @@ export class PlayerModel extends BaseEntity implements PlayerI{
         playerMatch => playerMatch.playerConnection
     )
     matchConnection: Promise<PlayerMatchModel[]>
+
+    
+    @OneToMany(
+        () => UserEscalationModel,
+        userEscalation => userEscalation.coachConnection
+    )
+    coachConnection: Promise<UserEscalationModel[]>
+
+    @OneToMany(
+        () => UserEscalationModel,
+        userEscalation => userEscalation.topLanerConnection
+    )
+    topLanerConnection: Promise<UserEscalationModel[]>
+
+    @OneToMany(
+        () => UserEscalationModel,
+        userEscalation => userEscalation.junglerConnection
+    )
+    junglerConnection: Promise<UserEscalationModel[]>
+
+    @OneToMany(
+        () => UserEscalationModel,
+        userEscalation => userEscalation.midLanerConnection
+    )
+    midLanerConnection: Promise<UserEscalationModel[]>
+
+    @OneToMany(
+        () => UserEscalationModel,
+        userEscalation => userEscalation.adCarryConnection
+    )
+    adCarryConnection: Promise<UserEscalationModel[]>
+
+    @OneToMany(
+        () => UserEscalationModel,
+        userEscalation => userEscalation.supportConnection
+    )
+    supportConnection: Promise<UserEscalationModel[]>
 }
 
 @singleton()

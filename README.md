@@ -1,6 +1,6 @@
 TODO:
 
-    -- [] Organizate all files in the context they need;
+    -- [x] Organizate all files in the context they need;
 
     -- [x] Add all GameEntities;
         -- [x] Team
@@ -30,10 +30,15 @@ TODO:
         -- [x] Reorganizate routes
 
     -- [] Add all AppEntities;
+        -- [x] Add all UserTeam;
+        -- [] Add all UserFriends;
+        -- [x] Add all UserEscalation;
+        -- [] Add all Competitions;
+        -- [] Add all UserCompetitions;
     
     -- [] Review all entities, and column names;
     -- [x] Implement uuid;
-    -- [] Implement changes;
+    -- [] Implement businnes rules;
     -- [x] Dont use default export, just for base classes;
 
     -- [] Implement Authentication;
