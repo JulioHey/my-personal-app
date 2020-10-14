@@ -7,9 +7,11 @@ import { userRouter } from "./routes/user.routes";
 import { userTeamRouter } from "./routes/app-routes/user-team.routes";
 import { userEscalationRouter } from "./routes/app-routes/user-escalation.routes";
 import { friendRouter } from "./routes/app-routes/friend.routes";
+import { competitionRouter } from "./routes/app-routes/competition.routes";
 
 const appRouter = Router();
 
+appRouter.use("/competition", competitionRouter);
 appRouter.use("/friend", friendRouter);
 appRouter.use("/userescalation", userEscalationRouter);
 appRouter.use("/userteam", userTeamRouter);
