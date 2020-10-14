@@ -8,9 +8,11 @@ import { userTeamRouter } from "./routes/app-routes/user-team.routes";
 import { userEscalationRouter } from "./routes/app-routes/user-escalation.routes";
 import { friendRouter } from "./routes/app-routes/friend.routes";
 import { competitionRouter } from "./routes/app-routes/competition.routes";
+import { userCompetitionRouter } from "./routes/app-routes/user-competition.routes";
 
 const appRouter = Router();
 
+appRouter.use("/usercompetition", userCompetitionRouter);
 appRouter.use("/competition", competitionRouter);
 appRouter.use("/friend", friendRouter);
 appRouter.use("/userescalation", userEscalationRouter);

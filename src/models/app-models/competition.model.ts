@@ -1,8 +1,9 @@
 import { injectable, singleton } from "tsyringe";
-import { BaseEntity, Column, Entity, getRepository, JoinColumn, OneToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
+import { BaseEntity, Column, Entity, getRepository, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
 import { CompetitionI } from "../../interfaces/app-interfaces/competition.interface";
 import RepoI from "../../interfaces/model.interface";
 import { UserModel } from "../auth-models/user.model";
+import { UserCompetitionModel } from "./user-competition.model";
 
 
 @injectable()
@@ -24,6 +25,12 @@ export class CompetitionModel extends BaseEntity implements CompetitionI{
     )
     @JoinColumn({name: "competition_owner"})
     ownerConnection: Promise<UserModel>
+
+    @OneToMany(
+        () => UserCompetitionModel,
+        userCompetition => userCompetition.competitionConnection
+    )
+    userConnection: Promise<UserCompetitionModel[]>
 }
 
 @singleton()

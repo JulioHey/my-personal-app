@@ -50,8 +50,8 @@ TODO:
             -- [] Get championPontuation with championId and RoundID;
             -- [] Get UserEscalation with UserID;
             -- [] Update user escalation;
-        -- [] Add all Competitions;
-        -- [] Add all UserCompetitions;
+        -- [x] Add all Competitions;
+        -- [x] Add all UserCompetitions;
             -- [] Get Competitions with UserID;
     
     -- [] Review all entities, and column names;

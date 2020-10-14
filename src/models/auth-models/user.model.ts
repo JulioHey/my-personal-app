@@ -4,6 +4,7 @@ import { UserI } from "../../interfaces/auth-interfaces/user.interface";
 import RepoI from "../../interfaces/model.interface";
 import { CompetitionModel } from "../app-models/competition.model";
 import { FriendModel } from "../app-models/friend.model";
+import { UserCompetitionModel } from "../app-models/user-competition.model";
 import { UserEscalationModel } from "../app-models/user-escalation.model";
 import { UserTeamModel } from "../app-models/user-team.model";
 import { PasswordModel } from "./password.model";
@@ -60,6 +61,13 @@ export class UserModel extends BaseEntity implements UserI{
         competition => competition.ownerConnection
     )
     ownerConnection: Promise<CompetitionModel>
+
+    @OneToMany(
+        () => UserCompetitionModel,
+        userCompetition => userCompetition.userConnection
+    )
+    competitionConnection: Promise<UserCompetitionModel[]>
+
 }
 
 @singleton()
