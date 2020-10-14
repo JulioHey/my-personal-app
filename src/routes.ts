@@ -6,9 +6,11 @@ import { adminRouter } from "./routes/admin.routes";
 import { userRouter } from "./routes/user.routes";
 import { userTeamRouter } from "./routes/app-routes/user-team.routes";
 import { userEscalationRouter } from "./routes/app-routes/user-escalation.routes";
+import { friendRouter } from "./routes/app-routes/friend.routes";
 
 const appRouter = Router();
 
+appRouter.use("/friend", friendRouter);
 appRouter.use("/userescalation", userEscalationRouter);
 appRouter.use("/userteam", userTeamRouter);
 appRouter.use("/user", sessionRouter);

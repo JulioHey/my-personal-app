@@ -2,6 +2,7 @@ import { injectable, singleton } from "tsyringe";
 import { BaseEntity, Column, Entity, getRepository, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
 import { UserI } from "../../interfaces/auth-interfaces/user.interface";
 import RepoI from "../../interfaces/model.interface";
+import { FriendModel } from "../app-models/friend.model";
 import { UserEscalationModel } from "../app-models/user-escalation.model";
 import { UserTeamModel } from "../app-models/user-team.model";
 import { PasswordModel } from "./password.model";
@@ -43,9 +44,15 @@ export class UserModel extends BaseEntity implements UserI{
 
     @OneToMany(
         () => UserEscalationModel,
-        escalation => escalation.userConnection
+        userEscalation => userEscalation.userConnection
     )
     escalationConnection: Promise<UserEscalationModel[]>
+
+    @OneToMany(
+        () => FriendModel,
+        friend => {friend.friendOneConnection , friend.friendTwoConnection}
+    )
+    friendConnection: Promise<FriendModel[]>
 }
 
 @singleton()

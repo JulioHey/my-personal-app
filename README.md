@@ -31,7 +31,7 @@ TODO:
 
     -- [] Add all AppEntities;
         -- [x] Add all UserTeam;
-        -- [] Add all UserFriends;
+        -- [x] Add all UserFriends;
         -- [x] Add all UserEscalation;
         -- [] Add all Competitions;
         -- [] Add all UserCompetitions;
