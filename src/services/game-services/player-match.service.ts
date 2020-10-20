@@ -1,4 +1,5 @@
 import { injectable } from "tsyringe";
+import { DeepPartial } from "typeorm";
 import {PlayerMatchI, PlayerMatchSI} from "../../interfaces/game-interfaces/player-match.interface";
 
 import { PlayerMatchRepo } from "../../models/game-models/player-match.model";
@@ -12,7 +13,7 @@ export class PlayerMatchService extends BaseService<PlayerMatchSI>{
         super(modelI)
     }
 
-    checkConstrains = async (data: PlayerMatchI) => {
+    checkConstrains = async (data: DeepPartial<PlayerMatchI>) => {
         const {playerId, matchId, championId} =  data;
 
         const existPlayerMatch = await this.get({playerId, matchId});

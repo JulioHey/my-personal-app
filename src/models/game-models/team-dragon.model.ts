@@ -1,6 +1,5 @@
 import { injectable, singleton } from "tsyringe";
 import { BaseEntity, Column, Entity, getRepository, JoinColumn, OneToOne, PrimaryColumn, Repository } from "typeorm";
-import { DragonType } from "../../interfaces/game-interfaces/match-dragon.interface";
 import { TeamDragonI } from "../../interfaces/game-interfaces/team-dragon.interface";
 import RepoI from "../../interfaces/model.interface";
 import { TeamMatchModel } from "./team-match.model";
@@ -13,13 +12,13 @@ export class TeamDragonModel extends BaseEntity implements TeamDragonI{
     teamMatchId: number;
 
     @Column({name: "first_dragon"})
-    firstDragon: DragonType;
+    firstDragon: boolean;
 
     @Column({name: "second_dragon"})
-    secondDragon: DragonType;
+    secondDragon: boolean;
 
-    @Column({name: "last_dragon"})
-    soulDragon: DragonType;
+    @Column({name: "soul_dragon"})
+    soulDragon: number;
 
     @Column({name: "ancient_dragon"})
     ancientDragon: number;

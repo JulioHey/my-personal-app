@@ -4,6 +4,7 @@ import { TeamMatchI, Status } from "../../interfaces/game-interfaces/team-match.
 import RepoI from "../../interfaces/model.interface";
 import {ChampionModel} from "./champion.model";
 import { MatchModel } from "./match.model";
+import { RoundModel } from "./round.model";
 import { TeamDragonModel } from "./team-dragon.model";
 import { TeamStatusModel } from "./team-status.model";
 import {TeamModel} from "./team.model";
@@ -20,6 +21,9 @@ class TeamMatchModel extends BaseEntity implements TeamMatchI{
 
     @Column({name: "match_id"})
     matchId: number;
+
+    @Column({name: "round_id"})
+    roundId: number;
 
     @Column({name: "first_ban_id"})
     firstBan: number;
@@ -52,6 +56,14 @@ class TeamMatchModel extends BaseEntity implements TeamMatchI{
     )
     @JoinColumn({  name: 'match_id' })
     matchConnection: Promise<MatchModel>;
+
+    @ManyToOne(
+        () => RoundModel,
+        round => round.teamConnection,
+        { primary: true },
+    )
+    @JoinColumn({  name: 'round_id' })
+    roundConnection: Promise<RoundModel>;
 
     @ManyToOne(
         () => ChampionModel,

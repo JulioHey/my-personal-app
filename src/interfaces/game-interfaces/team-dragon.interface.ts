@@ -1,12 +1,11 @@
 import { ModelI } from "../model.interface";
-import { DragonType } from "./match-dragon.interface";
 
 
 export interface TeamDragonI {
     teamMatchId: number
-    firstDragon: DragonType
-    secondDragon: DragonType
-    soulDragon: DragonType
+    firstDragon: boolean
+    secondDragon: boolean
+    soulDragon: number
     ancientDragon: number
 }
 

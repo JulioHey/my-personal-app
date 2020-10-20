@@ -1,4 +1,5 @@
 import { injectable } from "tsyringe";
+import { DeepPartial } from "typeorm";
 import {TeamMatchI, TeamMatchSI} from "../../interfaces/game-interfaces/team-match.interface";
 
 import { TeamMatchModel, TeamMatchRepo } from "../../models/game-models/team-match.model";
@@ -12,10 +13,10 @@ export class TeamMatchService extends BaseService<TeamMatchSI>{
         super(modelI)
     }
 
-    checkConstrains = async(data: TeamMatchI) => {
+    checkConstrains = async(data: DeepPartial<TeamMatchI>) => {
         const { matchId, firstBan, secondBan, thirdBan, teamId } = data;
 
-        if (firstBan === secondBan || firstBan === thirdBan || secondBan === thirdBan) {
+        if ( new Set([firstBan, secondBan, thirdBan]).size !== [firstBan, secondBan, thirdBan].length) {
             return {error: "Error"};
         }
 
@@ -37,6 +38,19 @@ export class TeamMatchService extends BaseService<TeamMatchSI>{
         }
 
         return data;
+    }
+
+    countBans = async(roundId: number, championId: number) => {
+        const numberOfBans = await this.model.repo.count({
+            where: [
+                {roundId, firstBan: championId},
+                {roundId, secondBan: championId},
+                {roundId, thirdBan: championId},
+            ],
+        });
+        console.log(numberOfBans)
+
+        return numberOfBans;
     }
 }
 

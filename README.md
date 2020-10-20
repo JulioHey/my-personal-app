@@ -6,16 +6,16 @@ TODO:
         -- [x] Team
             -- [x] Get all constrains;
         -- [x] Player
-            -- [] Get Player by Position
-            -- [] Get Player by Team
+            -- [x] Get Player by Position
+            -- [x] Get Player by Team
             -- [x] Get all constrains;
         -- [x] Champion
-            -- [] Get champion nubmers of bans
+            -- [x] Get champion nubmers of bans
             -- [x] Get all constrains;
         -- [x] Round
             -- [x] Get all constrains;
         -- [x] Match
-            -- [] Get future team Match
+            -- [x] Get future team Match
             -- [x] Get all constrains;
         -- [x] PLayerMatch
             -- [] Implement changes to playerValue by Pontuation
@@ -23,7 +23,7 @@ TODO:
         -- [x] TeamMatch
             -- [x] Get all constrains;
         -- [x] MatchDragons
-            -- [] Get all constrains;
+            -- [x] Get all constrains;
         -- [x] PlayerStatus
             -- [x] Get all constrains;
             -- [] Auto calculate player Pontuation with the schema

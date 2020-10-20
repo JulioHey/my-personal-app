@@ -6,6 +6,7 @@ import {ChampionModel} from "./champion.model";
 import { MatchModel } from "./match.model";
 import { PlayerStatusModel } from "./player-status.model";
 import {PlayerModel} from "./player.model";
+import { RoundModel } from "./round.model";
 
 
 @injectable()
@@ -19,6 +20,9 @@ export class PlayerMatchModel extends BaseEntity implements PlayerMatchI{
 
     @Column({name: "match_id"})
     matchId: number;
+
+    @Column({name: "round_id"})
+    roundId: number;
  
     @Column({name: "champion_id"})
     championId: number;
@@ -50,6 +54,14 @@ export class PlayerMatchModel extends BaseEntity implements PlayerMatchI{
     )
     @JoinColumn({  name: 'match_id' })
     matchConnection: Promise<MatchModel>;
+
+    @ManyToOne(
+        () => RoundModel,
+        round => round.playerConnection,
+        { primary: true },
+    )
+    @JoinColumn({  name: 'round_id' })
+    roundConnection: Promise<RoundModel>;
 
     @OneToOne(
         () => PlayerStatusModel,

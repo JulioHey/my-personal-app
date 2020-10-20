@@ -22,6 +22,11 @@ export class playermatch1602191623202 implements MigrationInterface {
                 isNullable: false
             },
             {
+                name: "round_id",
+                type: "integer",
+                isNullable: false
+            },
+            {
                 name: "champion_id",
                 type: "integer",
                 isNullable: false
@@ -58,11 +63,20 @@ export class playermatch1602191623202 implements MigrationInterface {
         referencedTableName: 'matches',
     });
 
+    private foreignKey4 = new TableForeignKey({
+        columnNames: [ 'round_id' ],
+        referencedColumnNames: ['round_id'],
+        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        referencedTableName: 'rounds',
+    });
+
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(this.table);
         await queryRunner.createForeignKey('player_matches', this.foreignKey1);
         await queryRunner.createForeignKey('player_matches', this.foreignKey2);
         await queryRunner.createForeignKey('player_matches', this.foreignKey3);
+        await queryRunner.createForeignKey('player_matches', this.foreignKey4);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
@@ -70,6 +84,7 @@ export class playermatch1602191623202 implements MigrationInterface {
         await queryRunner.dropForeignKey('player_matches', this.foreignKey1);
         await queryRunner.dropForeignKey('player_matches', this.foreignKey2);
         await queryRunner.dropForeignKey('player_matches', this.foreignKey3);
+        await queryRunner.dropForeignKey('player_matches', this.foreignKey4);
     }
 
 }

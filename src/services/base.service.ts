@@ -44,7 +44,10 @@ export default class BaseService<T>{
     }
 
     update = async(entityId: string, data: DeepPartial<T>) => {
-        const updatedEntity = await this.model.repo.update(entityId, data);
+        const checkedData = await this.checkConstrains(data);
+
+        const updatedEntity = await this.model.repo.update(entityId, checkedData);
+        
         return updatedEntity;
     };
 

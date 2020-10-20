@@ -11,24 +11,21 @@ export class teamdragons1602285196885 implements MigrationInterface {
             },
             {
                 name: "first_dragon",
-                type: "enum",
-                enum: ["fire", "wind", "mountain", "ocean"],
+                type: "boolean",
                 isNullable: false,
             },
             {
                 name: "second_dragon",
-                type: "enum",
-                enum: ["fire", "wind", "mountain", "ocean"],
-                isNullable: false,
-            },
-            {
-                name: "last_dragon",
-                type: "enum",
-                enum: ["fire", "wind", "mountain", "ocean"],
+                type: "boolean",
                 isNullable: false,
             },
             {
                 name: "soul_dragon",
+                type: "integer",
+                isNullable: false,
+            },
+            {
+                name: "ancient_dragon",
                 type: "integer",
                 isNullable: false,
             },
