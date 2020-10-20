@@ -11,5 +11,6 @@ teamUserRouter.get("/", teamController.get);
 teamUserRouter.get("/:id", teamController.getById);
 teamAdminRouter.post("/", teamController.post);
 teamAdminRouter.delete("/:id", teamController.remove);
+teamAdminRouter.put("/:id", teamController.update);
 
 export {teamUserRouter, teamAdminRouter};

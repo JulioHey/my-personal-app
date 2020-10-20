@@ -21,6 +21,7 @@ export class rounds1602043548986 implements MigrationInterface {
                 name: "round_date",
                 type: "varchar",
                 isNullable: false,
+                isUnique: true
             }
         ]
     })

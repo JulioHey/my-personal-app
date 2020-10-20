@@ -30,7 +30,10 @@ export default class BaseController{
     getById = async (req: Request, res: Response) => {
         try {
             const { id } = req.params;
-            const resource = await this.service.getById(id);
+
+            const { relations } = req.body;
+
+            const resource = await this.service.getById(id, relations as string[]);
             return res.send(resource)
         } catch(err) {
             return res.json(err)
@@ -47,4 +50,14 @@ export default class BaseController{
         }
     }
 
+    update = async (req: Request, res: Response) => {
+        try{
+            const {id} = req.params;
+            const data = req.body;
+            const updatedData = await this.service.update(id, data);
+            return res.json(updatedData);
+        }catch(err) {
+            return res.json(err)
+        }
+    }
 } 

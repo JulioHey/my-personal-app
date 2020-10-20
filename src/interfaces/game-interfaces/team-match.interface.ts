@@ -2,7 +2,7 @@ import { ModelI } from "../model.interface";
 
 export enum Status {
     "inGame",
-    "futute",
+    "future",
     "win",
     "lost"
 }

@@ -33,7 +33,7 @@ class TeamMatchModel extends BaseEntity implements TeamMatchI{
     @Column({
         name: "match_status",
         enum: Status,
-        default: [Status.futute]
+        default: [Status.future]
     })
     matchStatus: Status;
 

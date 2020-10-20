@@ -21,6 +21,7 @@ export class players1602118335502 implements MigrationInterface {
                 type: 'varchar',
                 length: '40',
                 isNullable: false,
+                isUnique: true,
             },
             {
                 name: 'player_position',
@@ -37,6 +38,7 @@ export class players1602118335502 implements MigrationInterface {
                 name: 'player_nickname',
                 type: 'varchar',
                 isNullable: false,
+                isUnique: true,
             },
         ]
     });
