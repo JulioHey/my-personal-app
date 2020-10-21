@@ -18,8 +18,8 @@ export default class BaseService<T>{
             return {Error: "You are violating some constrains of this schema, check the data again"}
         }
 
-        const resource = await this.model.repo.create(checkedData)
-        await this.model.repo.save(resource)
+        const resource = await this.model.repo.create(checkedData);
+        await this.model.repo.save(resource);
         return resource
     }
 
@@ -44,9 +44,7 @@ export default class BaseService<T>{
     }
 
     update = async(entityId: string, data: DeepPartial<T>) => {
-        const checkedData = await this.checkConstrains(data);
-
-        const updatedEntity = await this.model.repo.update(entityId, checkedData);
+        const updatedEntity = await this.model.repo.update(entityId, data);
         
         return updatedEntity;
     };

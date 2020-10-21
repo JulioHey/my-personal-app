@@ -1,5 +1,6 @@
 import { container, injectable } from "tsyringe";
 import { DeepPartial } from "typeorm";
+import { PlayerMatchSI } from "../../interfaces/game-interfaces/player-match.interface";
 import {PlayerStatusI, PlayerStatusSI} from "../../interfaces/game-interfaces/player-status.interface";
 
 import { PlayerStatusRepo } from "../../models/game-models/player-status.model";
@@ -19,18 +20,19 @@ export class PlayerStatusService extends BaseService<PlayerStatusSI>{
     calculateNewPontuation = async (data: DeepPartial<PlayerStatusI>) => {
         const { playerAssists, playerDeaths, playerKills, playerGold, playerMinions, playerVision, playerMatchId } = data;
 
-        const playerPoints = playerAssists - playerDeaths + playerKills + playerGold + playerMinions + playerVision;
+        const playerPoints = Number(playerAssists) - Number(playerDeaths) + Number(playerKills) + Number(playerGold) + Number(playerMinions) + Number(playerVision);
+        console.log(playerPoints);
+        console.log(playerMatchId) 
 
-        const resource = await this.PlayerMatchService.update(playerMatchId, {playerPoints});
-
-        return data;
+        await this.PlayerMatchService.update(playerMatchId, {playerPoints});
     }
 
-    checkConstrains = async (data: DeepPartial<PlayerStatusI>) => {
-
-        const resource = await this.calculateNewPontuation(data);
+    update = async(entityId: string, data: DeepPartial<any>) => {
+        await this.calculateNewPontuation(data);
         
-        return resource;
-    }
+        const updatedEntity = await this.model.repo.update(entityId, data);
+        
+        return updatedEntity;
+    };
 }
 

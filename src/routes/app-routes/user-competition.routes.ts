@@ -10,5 +10,6 @@ userCompetitionRouter.get("/", userCompetitionController.get);
 userCompetitionRouter.get("/:id", userCompetitionController.getById);
 userCompetitionRouter.post("/", userCompetitionController.post);
 userCompetitionRouter.delete("/:id", userCompetitionController.remove);
+userCompetitionRouter.put("/:id", userCompetitionController.update);
 
 export {userCompetitionRouter};

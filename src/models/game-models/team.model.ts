@@ -3,11 +3,12 @@ import {
     singleton
 } from 'tsyringe';
 import { TeamI } from "../../interfaces/game-interfaces/team.interface";
-import {getRepository, Entity, PrimaryGeneratedColumn, Column, Repository, BaseEntity, OneToMany, JoinColumn} from 'typeorm';
+import {getRepository, Entity, PrimaryGeneratedColumn, Column, Repository, BaseEntity, OneToMany, JoinColumn, OneToOne} from 'typeorm';
 import RepoI from '../../interfaces/model.interface';
 import {PlayerModel} from './player.model';
 import { MatchModel } from './match.model';
 import { TeamMatchModel } from './team-match.model';
+import { CoachModel } from './coach.model';
 
 @injectable()
 @Entity({name: "teams"})
@@ -44,6 +45,12 @@ export class TeamModel extends BaseEntity implements TeamI{
         teamMatch => teamMatch.teamConnection
     )
     matchConnection: Promise<TeamMatchModel[]>
+
+    @OneToMany(
+        () => CoachModel,
+        coach => coach.teamConnection
+    )
+    coachConnection: Promise<CoachModel>
 }
 
 @singleton()

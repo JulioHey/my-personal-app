@@ -8,8 +8,8 @@ const teamMatchController = container.resolve(TeamMatchController);
 
 teamMatchUserRouter.get("/", teamMatchController.get);
 teamMatchUserRouter.get("/:id", teamMatchController.getById);
-teamMatchUserRouter.put("/:id", teamMatchController.count);
 teamMatchAdminRouter.post("/", teamMatchController.post);
 teamMatchAdminRouter.delete("/:id", teamMatchController.remove);
+teamMatchUserRouter.put("/:id", teamMatchController.update);
 
 export {teamMatchUserRouter, teamMatchAdminRouter};

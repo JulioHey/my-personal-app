@@ -11,5 +11,6 @@ championAdminRouter.get("/", championController.get);
 championAdminRouter.get("/:id", championController.getById);
 championUserRouter.post("/", championController.post);
 championUserRouter.delete("/:id", championController.remove);
+championUserRouter.put("/:id", championController.update);
 
 export {championAdminRouter, championUserRouter};

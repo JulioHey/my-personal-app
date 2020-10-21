@@ -10,5 +10,6 @@ userEscalationRouter.get("/", userEscalationController.get);
 userEscalationRouter.get("/:id", userEscalationController.getById);
 userEscalationRouter.post("/", userEscalationController.post);
 userEscalationRouter.delete("/:id", userEscalationController.remove);
+userEscalationRouter.put("/:id", userEscalationController.update);
 
 export {userEscalationRouter};

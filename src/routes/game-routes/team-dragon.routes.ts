@@ -11,5 +11,6 @@ teamDragonUserRouter.get("/", teamDragonController.get);
 teamDragonUserRouter.get("/:id", teamDragonController.getById);
 teamDragonAdminRouter.post("/", teamDragonController.post);
 teamDragonAdminRouter.delete("/:id", teamDragonController.remove);
+teamDragonAdminRouter.put("/:id", teamDragonController.update);
 
 export {teamDragonUserRouter, teamDragonAdminRouter};

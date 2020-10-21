@@ -10,5 +10,6 @@ friendRouter.get("/", friendController.get);
 friendRouter.get("/:id", friendController.getById);
 friendRouter.post("/", friendController.post);
 friendRouter.delete("/:id", friendController.remove);
+friendRouter.put("/:id", friendController.update);
 
 export {friendRouter};

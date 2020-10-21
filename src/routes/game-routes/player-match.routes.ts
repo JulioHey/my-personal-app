@@ -9,6 +9,7 @@ const playerMatchController = container.resolve(PlayerMatchController);
 
 playerMatchUserRouter.get("/", playerMatchController.get);
 playerMatchUserRouter.get("/:id", playerMatchController.getById);
+playerMatchUserRouter.put("/:id", playerMatchController.update);
 playerMatchAdminRouter.post("/", playerMatchController.post);
 playerMatchAdminRouter.delete("/:id", playerMatchController.remove);
 

@@ -9,6 +9,7 @@ import { MatchModel } from './match.model';
 import { UserEscalationModel } from '../app-models/user-escalation.model';
 import { TeamMatchModel } from './team-match.model';
 import { PlayerMatchModel } from './player-match.model';
+import { CoachMatchModel } from './coach-match.model';
 
 @injectable()
 @Entity({name: "rounds"})
@@ -46,6 +47,12 @@ export class RoundModel extends BaseEntity implements RoundI{
         playerMatch => playerMatch.roundConnection
     )
     playerConnection: Promise<PlayerMatchModel[]>
+
+    @OneToMany(
+        () => CoachMatchModel,
+        coachMatch => coachMatch.roundConnection
+    )
+    coachConnection: Promise<CoachMatchModel[]>
 
 }
 

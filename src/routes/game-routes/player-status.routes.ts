@@ -11,5 +11,6 @@ playerStatusUserRouter.get("/", playerStatusController.get);
 playerStatusUserRouter.get("/:id", playerStatusController.getById);
 playerStatusAdminRouter.post("/", playerStatusController.post);
 playerStatusAdminRouter.delete("/:id", playerStatusController.remove);
+playerStatusAdminRouter.put("/:id", playerStatusController.update);
 
 export {playerStatusAdminRouter, playerStatusUserRouter};

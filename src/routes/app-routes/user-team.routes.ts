@@ -10,5 +10,6 @@ userTeamRouter.get("/", userTeamController.get);
 userTeamRouter.get("/:id", userTeamController.getById);
 userTeamRouter.post("/", userTeamController.post);
 userTeamRouter.delete("/:id", userTeamController.remove);
+userTeamRouter.put("/:id", userTeamController.update);
 
 export {userTeamRouter};

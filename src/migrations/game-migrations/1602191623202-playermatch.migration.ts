@@ -35,7 +35,12 @@ export class playermatch1602191623202 implements MigrationInterface {
                 name: "player_points",
                 type: "integer",
                 isNullable: false
-            }
+            },
+            {
+                name: 'player_value',
+                type: 'float',
+                isNullable: false,
+            },
         ]
     });
 

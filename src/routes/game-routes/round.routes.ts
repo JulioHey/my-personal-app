@@ -11,5 +11,6 @@ roundUserRouter.get("/", roundController.get);
 roundUserRouter.get("/:id", roundController.getById);
 roundAdminRouter.post("/", roundController.post);
 roundAdminRouter.delete("/:id", roundController.remove);
+roundAdminRouter.put("/:id", roundController.update);
 
 export {roundUserRouter, roundAdminRouter};

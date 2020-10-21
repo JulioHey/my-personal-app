@@ -18,7 +18,7 @@ TODO:
             -- [x] Get future team Match
             -- [x] Get all constrains;
         -- [x] PLayerMatch
-            -- [] Implement changes to playerValue by Pontuation
+            -- [x] Implement changes to playerValue by Pontuation
             -- [x] Get all constrains;
         -- [x] TeamMatch
             -- [x] Get all constrains;
@@ -26,17 +26,17 @@ TODO:
             -- [x] Get all constrains;
         -- [x] PlayerStatus
             -- [x] Get all constrains;
-            -- [] Auto calculate player Pontuation with the schema
+            -- [x] Auto calculate player Pontuation with the schema
         -- [x] TeamStatus
-            -- [] Get all constrains;
+            -- [x] Get all constrains;
             -- [] Auto calculate coach Pontuation with the schema
 
 
     -- [x] Add all UserEntities;
         -- [x] Users
-            -- [] Unique email
+            -- [x] Unique email
         -- [x] Roles
-            -- [] Only Two Roles ==> User and Admin 
+            -- [x] Only Two Roles ==> User and Admin 
         -- [x] UserRole
         -- [x] Permission
         -- [x] PermissionRoles

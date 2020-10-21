@@ -11,5 +11,6 @@ matchDragonUserRouter.get("/", matchDragonController.get);
 matchDragonUserRouter.get("/:id", matchDragonController.getById);
 matchDragonAdminRouter.post("/", matchDragonController.post);
 matchDragonAdminRouter.delete("/:id", matchDragonController.remove);
+matchDragonAdminRouter.put("/:id", matchDragonController.update);
 
 export {matchDragonUserRouter, matchDragonAdminRouter};
