@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class userescalation1602616351505 implements MigrationInterface {
+export class userescalation1603239921942 implements MigrationInterface {
     private table = new Table({
         name: "user_escalations",
         columns:[
@@ -76,10 +76,10 @@ export class userescalation1602616351505 implements MigrationInterface {
 
     private foreignKey3 = new TableForeignKey({
         columnNames: [ 'coach_id' ],
-        referencedColumnNames: ['player_id'],
+        referencedColumnNames: ['coach_id'],
         onDelete: 'CASCADE',
         onUpdate: "CASCADE",
-        referencedTableName: 'players',
+        referencedTableName: 'coachs',
     });
 
     private foreignKey4 = new TableForeignKey({

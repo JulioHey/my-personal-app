@@ -10,6 +10,8 @@ import {teamMatchAdminRouter} from './game-routes/team-match.routes';
 import {playerStatusAdminRouter} from "./game-routes/player-status.routes";
 import {matchDragonAdminRouter} from './game-routes/match-dragon.routes';
 import {teamStatusAdminRouter} from './game-routes/team-status.routes';
+import { coachAdminRouter } from "./game-routes/coach.routes";
+import { coachMatchAdminRouter } from "./game-routes/coach-match.routes";
 
 
 
@@ -26,6 +28,8 @@ adminRouter.use("/teammatch", teamMatchAdminRouter);
 adminRouter.use('/playerstatus', playerStatusAdminRouter);
 adminRouter.use("/matchdragon", matchDragonAdminRouter);
 adminRouter.use("/teamstatus", teamStatusAdminRouter);
+adminRouter.use("/coach", coachAdminRouter);
+adminRouter.use("/coachmatch", coachMatchAdminRouter);
 
 
 export {adminRouter}
