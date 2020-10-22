@@ -30,6 +30,9 @@ TODO:
         -- [x] TeamStatus
             -- [x] Get all constrains;
             -- [] Auto calculate coach Pontuation with the schema
+        -- [] Coach
+        -- [] CoachMatch
+
 
 
     -- [x] Add all UserEntities;

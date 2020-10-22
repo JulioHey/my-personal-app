@@ -1,4 +1,5 @@
 import { autoInjectable, delay, inject } from "tsyringe";
+import {Request, Response} from 'express';
 import {RoundService} from "../../services/game-services/round.service";
 import BaseController from "../base.controller";
 
@@ -9,4 +10,12 @@ export class RoundController extends BaseController {
         super(RoundService)
     }
 
+    post = async(req: Request, res: Response) => {
+        try {
+            const resource = await this.RoundService.create(req.body)
+            return res.send(resource);
+        } catch(err){
+            return res.json(err)
+        }
+    }
 }

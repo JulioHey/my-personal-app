@@ -30,6 +30,10 @@ export class PlayerMatchModel extends BaseEntity implements PlayerMatchI{
     @Column({name: "player_points"})
     playerPoints: number;
 
+    
+    @Column({name: "player_value"})
+    playerValue: number;
+
     @ManyToOne(
         () => PlayerModel,
         player => player.matchConnection,

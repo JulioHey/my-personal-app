@@ -1,6 +1,5 @@
 import { container, injectable } from "tsyringe";
 import { DeepPartial } from "typeorm";
-import { forEachChild } from "typescript";
 import {PlayerMatchI, PlayerMatchSI} from "../../interfaces/game-interfaces/player-match.interface";
 
 import { PlayerMatchRepo } from "../../models/game-models/player-match.model";
@@ -25,22 +24,35 @@ export class PlayerMatchService extends BaseService<PlayerMatchSI>{
 
         console.log(playerMatch.playerId);
 
-        await this.updatePlayerValue(playerMatch.playerId);
-        
         return updatedEntity;
     };
 
-    updatePlayerValue = async (playerId: number) => {
-        const playerMatches = await this.get({playerId});
+    updatePlayersValue = async () => {
+        const players = await this.PlayerService.get();
 
-        let sum = 0;
-        playerMatches.forEach(playerMatch => {
-            sum += playerMatch.playerPoints;
-        })
+        console.log(players)
 
-        const playerValue = sum/playerMatches.length;
+        await Promise.all(players.map(async (player) => {
+            const playerMatches = await this.get({playerId: player.playerId});
 
-        await this.PlayerService.update(playerId, {playerValue})
+            let sum = 0;
+            // playerMatches.forEach(playerMatch => {
+            //     sum += playerMatch.playerPoints;
+            // })
+
+            console.log(playerMatches)
+    
+
+            for (var i = 0; i < playerMatches.length; i++) {
+                sum += playerMatches[i].playerPoints
+            }
+
+            const playerValue = sum/playerMatches.length;
+
+            console.log(playerValue)
+
+            await this.PlayerService.update(player.playerId, {playerValue})
+        }));
     }
 
     checkConstrains = async (data: DeepPartial<PlayerMatchI>): Promise<any> => {

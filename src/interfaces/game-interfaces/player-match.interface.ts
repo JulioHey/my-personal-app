@@ -8,6 +8,7 @@ export interface PlayerMatchI {
     roundId: number
     championId: number
     playerPoints: number
+    playerValue: number
 }
 
 export interface PlayerMatchSI extends  ModelI, PlayerMatchI{}
