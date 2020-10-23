@@ -11,7 +11,7 @@ export default class BaseService<T>{
 
     post = async (data: T) => {
         const checkedData = await this.checkConstrains(data);
-
+        
         const {error} = checkedData;
 
         if(error) {

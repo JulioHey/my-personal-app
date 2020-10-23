@@ -55,6 +55,12 @@ export class userescalation1603239921942 implements MigrationInterface {
                 name: "third_ban_id",
                 type: "integer",
             },
+            {
+                name: "user_pontuation",
+                type: "decimal",
+                precision: 5,
+                scale: 2
+            },
         ]
     });
 

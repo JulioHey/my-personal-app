@@ -55,15 +55,16 @@ TODO:
             -- [] Update UserTeam patrimony with the changes on the player values;
             -- [] Update total pontuation in the tournament
         -- [x] Add all UserFriends;
-            -- [] Get UserFriends with UserID;
+            -- [x] Get UserFriends with UserID;
+            -- [x] Dont let user have two equals connections;
         -- [x] Add all UserEscalation;
-            -- [] Get playerPontuation with playerId and RoundID;
-            -- [] Get championPontuation with championId and RoundID;
-            -- [] Get UserEscalation with UserID;
-            -- [] Update user escalation;
+            -- [x] Get playerPontuation with playerId and RoundID;
+            -- [x] Get championPontuation with championId and RoundID;
+            -- [x] Get UserEscalation with UserID;
+            -- [x] Update user escalation;
         -- [x] Add all Competitions;
         -- [x] Add all UserCompetitions;
-            -- [] Get Competitions with UserID;
+            -- [x] Get Competitions with UserID;
     
     -- [] Review all entities, and column names;
     -- [x] Implement uuid;

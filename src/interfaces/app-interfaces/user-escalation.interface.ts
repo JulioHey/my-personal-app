@@ -14,6 +14,7 @@ export interface UserEscalationI {
     firstBan: number
     secondBan: number
     thirdBan: number
+    userPontuation: number
 }
 
 export interface UserEscalationSI extends ModelI{}

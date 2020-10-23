@@ -38,8 +38,6 @@ export class UserEscalationService extends BaseService<UserEscalationSI>{
 
     calculateUserPontuation = async(data) => {
         const {
-            userEscaltionId,
-            userId,
             roundId,
             coach_id,
             toplaner,
@@ -54,9 +52,9 @@ export class UserEscalationService extends BaseService<UserEscalationSI>{
 
         const playerPontuaions =await this.calculatePlayersPontuation(roundId, [jungler, midlaner, adcarry, toplaner, support]);
         const bansPontuaions =await this.calculateChampionsPontuation(roundId, [firstBan, secondBan, thirdBan]);
-        const coachPontuaions =await this.getCoachPontuation(roundId, coach_id);
+        const coachPontuation =await this.getCoachPontuation(roundId, coach_id);
 
-        console.log(coachPontuaions + bansPontuaions + playerPontuaions)
+        return playerPontuaions + bansPontuaions + coachPontuation;
     }
 
     calculatePlayersPontuation = async (roundId, playersIds: number[]) => {
@@ -94,6 +92,7 @@ export class UserEscalationService extends BaseService<UserEscalationSI>{
         if (coachMatch[0]) {
             return coachMatch[0].coachPontuation;
         }
+        return 0;
     }
 
     checkConstrains = async (data: DeepPartial<any>) => {
@@ -122,7 +121,9 @@ export class UserEscalationService extends BaseService<UserEscalationSI>{
     update = async(entityId: string, data: DeepPartial<any>) => {
         await this.checkConstrains(data);
 
-        await this.calculateUserPontuation(data);
+        const userPontuation = await this.calculateUserPontuation(data);
+
+        data.userPontuation = userPontuation;
 
         const updatedEntity = await this.model.repo.update(entityId, data);
         

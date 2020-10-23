@@ -47,6 +47,9 @@ export class UserEscalationModel extends BaseEntity implements UserEscalationI{
     @Column({name: "third_ban_id"})
     thirdBan: number;
 
+    @Column({name: "user_pontuation"})
+    userPontuation: number;
+
     @ManyToOne(
         () => UserModel,
         user => user.escalationConnection,
