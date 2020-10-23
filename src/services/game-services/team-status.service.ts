@@ -4,21 +4,18 @@ import { TeamStatusSI } from "../../interfaces/game-interfaces/team-status.inter
 import { TeamStatusRepo } from "../../models/game-models/team-status.model";
 import BaseService from "../base.service";
 import { CoachMatchService } from "./coach-match.service";
-import { TeamMatchService } from "./team-match.service";
 
 
 @injectable()
 export class TeamStatusService extends BaseService<TeamStatusSI>{
 
     private CoachMatchService;
-    private TeamMatchService;
     constructor(modelI?: TeamStatusRepo) {
         super(modelI);
-        this.TeamMatchService = container.resolve(TeamMatchService);
         this.CoachMatchService = container.resolve(CoachMatchService);
     }
 
-    calculatePontuation = async (data) => {
+    updateCoachPontuation = async (data) => {
         const {
             teamMatchId,
             teamTowers,
@@ -31,7 +28,7 @@ export class TeamStatusService extends BaseService<TeamStatusSI>{
 
         const {coachValue} = await this.CoachMatchService.getById(teamMatchId);
 
-        const newValue = (coachValue + coachPontuation)/2
+        const newValue = (coachValue + coachPontuation)/2;
 
         await this.CoachMatchService.update(teamMatchId, {coachValue: newValue,coachPontuation});
     }
@@ -39,7 +36,7 @@ export class TeamStatusService extends BaseService<TeamStatusSI>{
     update = async(entityId: string, data: DeepPartial<any>) => {
         const updatedEntity = await this.model.repo.update(entityId, data);
 
-        await this.calculatePontuation(data);
+        await this.updateCoachPontuation(data);
 
         return updatedEntity;
     };

@@ -44,7 +44,7 @@ export class PlayerMatchService extends BaseService<PlayerMatchSI>{
         return;
     }
 
-    updatePlayersValue = async (roundNumber: number) => {
+    updatePlayersValue = async () => {
         const players = await this.PlayerService.get();
 
         await Promise.all(players.map(async (player) => {

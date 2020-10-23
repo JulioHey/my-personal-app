@@ -9,4 +9,4 @@ export interface CoachI {
     coachNickname: string
 }
 
-export interface CoachSI extends ModelI{}
+export interface CoachSI extends CoachI, ModelI{}

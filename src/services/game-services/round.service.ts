@@ -5,6 +5,7 @@ import { MatchI } from "../../interfaces/game-interfaces/match.interface";
 import {RoundSI} from "../../interfaces/game-interfaces/round.interface";
 import {RoundRepo} from "../../models/game-models/round.model";
 import BaseService from "../base.service";
+import { CoachMatchService } from "./coach-match.service";
 import { MatchService } from "./match.service";
 import { PlayerMatchService } from "./player-match.service";
 
@@ -14,11 +15,13 @@ export class RoundService extends BaseService<RoundSI>{
 
     private MatchService;
     private PlayerMatchService;
+    private CoachMatchService;
     
     constructor(modelI?: RoundRepo){
         super(modelI)
         this.MatchService = container.resolve(MatchService);
         this.PlayerMatchService = container.resolve(PlayerMatchService);
+        this.CoachMatchService = container.resolve(CoachMatchService);
     }
 
     
@@ -42,7 +45,8 @@ export class RoundService extends BaseService<RoundSI>{
             return newMatch;
         }));
 
-        await this.PlayerMatchService.updatePlayersValue(roundNumber);
+        await this.PlayerMatchService.updatePlayersValue();
+        await this.CoachMatchService.updateCoachsValue();
 
         return {resource, newMatches}
     }
