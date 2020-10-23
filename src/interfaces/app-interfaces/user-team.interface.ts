@@ -8,4 +8,4 @@ export interface UserTeamI {
     userTeamPatrimony: number
 }
 
-export interface UserTeamSI extends ModelI{}
+export interface UserTeamSI extends UserTeamI, ModelI{}

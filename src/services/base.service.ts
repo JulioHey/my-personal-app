@@ -18,7 +18,7 @@ export default class BaseService<T>{
             return {Error: "You are violating some constrains of this schema, check the data again"}
         }
 
-        const resource = await this.model.repo.create(checkedData);
+        const resource = await this.model.repo.create(data);
         await this.model.repo.save(resource);
         return resource
     }

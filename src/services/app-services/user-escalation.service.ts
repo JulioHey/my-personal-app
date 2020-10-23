@@ -7,6 +7,7 @@ import BaseService from "../base.service";
 import { CoachMatchService } from "../game-services/coach-match.service";
 import { PlayerMatchService } from "../game-services/player-match.service";
 import { TeamMatchService } from "../game-services/team-match.service";
+import { UserTeamService } from "./user-team.service";
 
 
 @injectable()
@@ -15,8 +16,10 @@ export class UserEscalationService extends BaseService<UserEscalationSI>{
     private PlayerMatchService;
     private TeamMatchService;
     private CoachMatchService;
+    private UserTeamService;
     constructor(modelI?: UserEscalationRepo){
         super(modelI);
+        this.UserTeamService = container.resolve(UserTeamService);
         this.CoachMatchService = container.resolve(CoachMatchService);
         this.TeamMatchService = container.resolve(TeamMatchService);
         this.PlayerMatchService = container.resolve(PlayerMatchService);
@@ -38,6 +41,7 @@ export class UserEscalationService extends BaseService<UserEscalationSI>{
 
     calculateUserPontuation = async(data) => {
         const {
+            userId,
             roundId,
             coach_id,
             toplaner,
@@ -50,23 +54,28 @@ export class UserEscalationService extends BaseService<UserEscalationSI>{
             thirdBan
         } = data;
 
-        const playerPontuaions =await this.calculatePlayersPontuation(roundId, [jungler, midlaner, adcarry, toplaner, support]);
+        const playerPontuaions =await this.calculatePlayersPontuation(roundId, userId, [jungler, midlaner, adcarry, toplaner, support]);
         const bansPontuaions =await this.calculateChampionsPontuation(roundId, [firstBan, secondBan, thirdBan]);
         const coachPontuation =await this.getCoachPontuation(roundId, coach_id);
 
         return playerPontuaions + bansPontuaions + coachPontuation;
     }
 
-    calculatePlayersPontuation = async (roundId, playersIds: number[]) => {
+    calculatePlayersPontuation = async (roundId, userId, playersIds: number[]) => {
         let sum = 0;
+        let deltaPatrymony = 0;
 
-        await Promise.all(playersIds.map(async (player) => {
-            const playerMatch = await this.PlayerMatchService.get({roundId, playerId: player})
+        await Promise.all(playersIds.map(async (playerId) => {
+            const playerMatch = await this.PlayerMatchService.get({roundId, playerId: playerId});
 
             if (playerMatch[0]) {
                 sum += playerMatch[0].playerPoints;
+                deltaPatrymony += await this.PlayerMatchService.calculateDeltaPatrymony(String(playerId) , playerMatch[0].playerValue);
             };
+
         }));
+
+        await this.UserTeamService.calcNewPatrymony(userId,  deltaPatrymony)
 
         return sum;
     }
@@ -117,7 +126,7 @@ export class UserEscalationService extends BaseService<UserEscalationSI>{
 
         return data;
     }
-    
+
     update = async(entityId: string, data: DeepPartial<any>) => {
         await this.checkConstrains(data);
 

@@ -10,4 +10,4 @@ export interface CoachMatchI {
     coachPontuation: number
 }
 
-export interface CoachMatchSI extends ModelI{}
+export interface CoachMatchSI extends CoachMatchI, ModelI{}

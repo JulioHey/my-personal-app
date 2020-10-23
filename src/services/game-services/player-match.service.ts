@@ -36,7 +36,7 @@ export class PlayerMatchService extends BaseService<PlayerMatchSI>{
             const {playerId} = await this.model.repo.findOne(playerMatchId);
 
             const {playerValue} = await this.PlayerService.model.repo.findOne(playerId);
-    
+
             const newPlayerValue = (playerValue +  playerPoints)/ 2;
     
             return {playerValue: newPlayerValue};
@@ -46,12 +46,14 @@ export class PlayerMatchService extends BaseService<PlayerMatchSI>{
 
     updatePlayersValue = async () => {
         const players = await this.PlayerService.get();
-
         await Promise.all(players.map(async (player) => {
             const playerMatches = await this.get({playerId: player.playerId});
 
-            await this.PlayerService.update(player.playerId, {playerValue: playerMatches[(playerMatches.length -1)].playerValue})
-        }));
+            if(playerMatches[0]) {
+                await this.PlayerService.update(player.playerId, {playerValue: playerMatches[(playerMatches.length -1)].playerValue});
+            }
+        })
+        );
     }
 
     checkConstrains = async (data: DeepPartial<PlayerMatchI>): Promise<any> => {
@@ -65,6 +67,14 @@ export class PlayerMatchService extends BaseService<PlayerMatchSI>{
         }
 
         return data;
+    }
+
+    calculateDeltaPatrymony = async (playerId: string, playerNewValue: number) => {
+        const player: any = await this.PlayerService.getById(playerId);
+    
+        const {playerValue} = player;
+
+        return (playerNewValue - playerValue);
     }
 }
 

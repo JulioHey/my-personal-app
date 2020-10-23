@@ -47,7 +47,7 @@ export class RoundService extends BaseService<RoundSI>{
 
         await this.PlayerMatchService.updatePlayersValue();
         await this.CoachMatchService.updateCoachsValue();
-
+        
         return {resource, newMatches}
     }
 }
