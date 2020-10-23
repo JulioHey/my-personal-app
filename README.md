@@ -29,9 +29,9 @@ TODO:
             -- [x] Auto calculate player Pontuation with the schema
         -- [x] TeamStatus
             -- [x] Get all constrains;
-            -- [] Auto calculate coach Pontuation with the schema
-        -- [] Coach
-        -- [] CoachMatch
+            -- [x] Auto calculate coach Pontuation with the schema
+        -- [x] Coach
+        -- [x] CoachMatch
 
 
 

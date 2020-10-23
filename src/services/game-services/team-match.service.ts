@@ -48,7 +48,6 @@ export class TeamMatchService extends BaseService<TeamMatchSI>{
                 {roundId, thirdBan: championId},
             ],
         });
-        console.log(numberOfBans)
 
         return numberOfBans;
     }
