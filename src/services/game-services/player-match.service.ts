@@ -18,40 +18,39 @@ export class PlayerMatchService extends BaseService<PlayerMatchSI>{
 
 
     update = async(entityId: string, data: DeepPartial<any>) => {
+        const {playerValue} = await this.updatePlayerValue({playerMatchId: entityId, playerPoints: data.playerPoints});
+
+        if (playerValue) {
+            data.playerValue = playerValue;
+        }
+
         const updatedEntity = await this.model.repo.update(entityId, data);
-
-        const playerMatch = await this.model.repo.findOne(data);
-
-        console.log(playerMatch.playerId);
 
         return updatedEntity;
     };
 
-    updatePlayersValue = async () => {
-        const players = await this.PlayerService.get();
+    updatePlayerValue = async (data: DeepPartial<any>): Promise<{playerValue: number} | null> => {
+        const {playerMatchId, playerPoints} = data;
 
-        console.log(players)
+        if(playerMatchId && playerPoints) {
+            const {playerId} = await this.model.repo.findOne(playerMatchId);
+
+            const {playerValue} = await this.PlayerService.model.repo.findOne(playerId);
+    
+            const newPlayerValue = (playerValue +  playerPoints)/ 2;
+    
+            return {playerValue: newPlayerValue};
+        }
+        return;
+    }
+
+    updatePlayersValue = async (roundNumber: number) => {
+        const players = await this.PlayerService.get();
 
         await Promise.all(players.map(async (player) => {
             const playerMatches = await this.get({playerId: player.playerId});
 
-            let sum = 0;
-            // playerMatches.forEach(playerMatch => {
-            //     sum += playerMatch.playerPoints;
-            // })
-
-            console.log(playerMatches)
-    
-
-            for (var i = 0; i < playerMatches.length; i++) {
-                sum += playerMatches[i].playerPoints
-            }
-
-            const playerValue = sum/playerMatches.length;
-
-            console.log(playerValue)
-
-            await this.PlayerService.update(player.playerId, {playerValue})
+            await this.PlayerService.update(player.playerId, {playerValue: playerMatches[(playerMatches.length -1)].playerValue})
         }));
     }
 

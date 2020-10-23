@@ -2,7 +2,6 @@ import { injectable, singleton } from "tsyringe";
 import { BaseEntity, Column, Entity, getRepository, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, Repository } from "typeorm";
 import { MatchI } from "../../interfaces/game-interfaces/match.interface";
 import RepoI from "../../interfaces/model.interface";
-import { CoachMatchModel } from "./coach-match.model";
 import { MatchDragonModel } from "./match-dragon.model";
 import { PlayerMatchModel } from "./player-match.model";
 import {RoundModel} from "./round.model";
@@ -69,13 +68,6 @@ export class MatchModel extends BaseEntity implements MatchI{
         matchDragon => matchDragon.matchConnection
     )
     dragonConnection: Promise<MatchDragonModel>
-
-
-    @OneToMany(
-        () => CoachMatchModel,
-        coachMatch => coachMatch.matchConnection
-    )
-    coachConnection: Promise<CoachMatchModel[]>
 }
 
 @singleton()

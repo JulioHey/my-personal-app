@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class coachMatchs1603239921941 implements MigrationInterface {
+export class coachMatchs1603239921944 implements MigrationInterface {
     private table = new Table({
         name: "coach_matchs",
         columns: [
@@ -22,7 +22,7 @@ export class coachMatchs1603239921941 implements MigrationInterface {
                 isNullable: false,
             },
             {
-                name: 'match_id',
+                name: 'team_match_id',
                 type: 'integer',
                 isNullable: false,
             },
@@ -56,11 +56,11 @@ export class coachMatchs1603239921941 implements MigrationInterface {
     });
 
     private foreignKey3 = new TableForeignKey({
-        columnNames: [ 'match_id' ],
-        referencedColumnNames: ['match_id'],
+        columnNames: [ 'team_match_id' ],
+        referencedColumnNames: ['team_match_id'],
         onDelete: 'CASCADE',
         onUpdate: "CASCADE",
-        referencedTableName: 'matches',
+        referencedTableName: 'team_matches',
     });
 
     public async up(queryRunner: QueryRunner): Promise<void> {

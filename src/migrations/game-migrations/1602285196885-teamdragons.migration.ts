@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class teamdragons1602285196885 implements MigrationInterface {
+export class teamdragons1603239921944 implements MigrationInterface {
     private table = new Table({
         name: "team_dragons",
         columns: [

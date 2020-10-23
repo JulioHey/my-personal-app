@@ -21,8 +21,6 @@ export class PlayerStatusService extends BaseService<PlayerStatusSI>{
         const { playerAssists, playerDeaths, playerKills, playerGold, playerMinions, playerVision, playerMatchId } = data;
 
         const playerPoints = Number(playerAssists) - Number(playerDeaths) + Number(playerKills) + Number(playerGold) + Number(playerMinions) + Number(playerVision);
-        console.log(playerPoints);
-        console.log(playerMatchId) 
 
         await this.PlayerMatchService.update(playerMatchId, {playerPoints});
     }

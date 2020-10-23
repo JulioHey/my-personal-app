@@ -8,20 +8,20 @@ import { TeamModel } from "./team.model";
 @injectable()
 @Entity({name: "coachs"})
 export class CoachModel extends BaseEntity implements CoachI {
-    @PrimaryGeneratedColumn()
-    coach_id: number;
+    @PrimaryGeneratedColumn({name: "coach_id"})
+    coachId: number;
 
-    @Column()
-    team_id: number;
+    @Column({name: "team_id"})
+    teamId: number;
 
-    @Column()
-    coach_name: string;
+    @Column({name: "coach_name"})
+    coachName: string;
 
-    @Column()
-    coach_value: number;
+    @Column({name: "coach_value"})
+    coachValue: number;
 
-    @Column()
-    coach_nickname: string;
+    @Column({name: "coach_nickname"})
+    coachNickname: string;
 
     @ManyToOne(
         () => TeamModel,

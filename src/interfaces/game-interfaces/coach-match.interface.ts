@@ -2,12 +2,12 @@ import { ModelI } from "../model.interface";
 
 
 export interface CoachMatchI {
-    coach_match_id: number
-    coach_id: number
-    round_id: number
-    match_id: number
-    coach_value: number
-    coach_pontuation: number
+    coachMatchId: number
+    coachId: number
+    roundId: number
+    teamMatchId: number
+    coachValue: number
+    coachPontuation: number
 }
 
 export interface CoachMatchSI extends ModelI{}

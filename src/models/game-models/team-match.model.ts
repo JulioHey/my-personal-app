@@ -3,6 +3,7 @@ import { BaseEntity, Column, Entity, getRepository, JoinColumn, ManyToOne, OneTo
 import { TeamMatchI, Status } from "../../interfaces/game-interfaces/team-match.interface";
 import RepoI from "../../interfaces/model.interface";
 import {ChampionModel} from "./champion.model";
+import { CoachMatchModel } from "./coach-match.model";
 import { MatchModel } from "./match.model";
 import { RoundModel } from "./round.model";
 import { TeamDragonModel } from "./team-dragon.model";
@@ -24,6 +25,9 @@ class TeamMatchModel extends BaseEntity implements TeamMatchI{
 
     @Column({name: "round_id"})
     roundId: number;
+
+    @Column({name: "coach_id"})
+    coachId: number;    
 
     @Column({name: "first_ban_id"})
     firstBan: number;
@@ -100,6 +104,13 @@ class TeamMatchModel extends BaseEntity implements TeamMatchI{
         teamStatus => teamStatus.teamConnection
     )
     dragonConnection: Promise<TeamDragonModel>
+
+    
+    @OneToOne(
+        () => CoachMatchModel,
+        coachMatch => coachMatch.matchConnection
+    )
+    coachConnection: Promise<CoachMatchModel[]>
 }
 
 @singleton()

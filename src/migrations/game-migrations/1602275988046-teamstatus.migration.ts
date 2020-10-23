@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class teamstatus1602275988046 implements MigrationInterface {
+export class teamstatus1603239921944 implements MigrationInterface {
     private table = new Table({
         name: "team_status",
         columns:[
@@ -24,6 +24,11 @@ export class teamstatus1602275988046 implements MigrationInterface {
                 type: "integer",
                 isNullable: false,
             },
+            {
+                name: "team_dragons",
+                type: "integer",
+                isNullable: false,
+            }
         ]
     });
 

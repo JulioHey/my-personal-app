@@ -3,30 +3,30 @@ import { BaseEntity, Column, Entity, getRepository, JoinColumn, ManyToOne, Prima
 import { CoachMatchI } from "../../interfaces/game-interfaces/coach-match.interface";
 import RepoI from "../../interfaces/model.interface";
 import { CoachModel } from "./coach.model";
-import { MatchModel } from "./match.model";
 import { RoundModel } from "./round.model";
+import { TeamMatchModel } from "./team-match.model";
 
 
 @injectable()
 @Entity({name: "coach_matchs"})
 export class CoachMatchModel extends BaseEntity implements CoachMatchI{
-    @PrimaryGeneratedColumn()
-    coach_match_id: number;
+    @PrimaryGeneratedColumn({name: "coach_match_id"})
+    coachMatchId: number;
 
-    @Column()
-    coach_id: number;
+    @Column({name: "coach_id"})
+    coachId: number;
 
-    @Column()
-    round_id: number;
+    @Column({name: "round_id"})
+    roundId: number;
 
-    @Column()
-    match_id: number;
+    @Column({name: "team_match_id"})
+    teamMatchId: number;
 
-    @Column()
-    coach_value: number;
+    @Column({name: "coach_value"})
+    coachValue: number;
 
-    @Column()
-    coach_pontuation: number;
+    @Column({name: "coach_pontuation"})
+    coachPontuation: number;
 
     @ManyToOne(
         () => CoachModel,
@@ -46,15 +46,15 @@ export class CoachMatchModel extends BaseEntity implements CoachMatchI{
     roundConnection: Promise<RoundModel>
 
     @ManyToOne(
-        () => MatchModel,
+        () => TeamMatchModel,
         match => match.coachConnection,
         {primary: true}
     )
-    @JoinColumn({name: "match_id"})
-    matchConnection: Promise<MatchModel>
+    @JoinColumn({name: "team_match_id"})
+    matchConnection: Promise<TeamMatchModel>
 }
 
 @singleton()
 export class CoachMatchRepo implements RepoI{
-    repo: Repository<any> = getRepository(CoachMatchRepo)
+    repo: Repository<any> = getRepository(CoachMatchModel)
 }

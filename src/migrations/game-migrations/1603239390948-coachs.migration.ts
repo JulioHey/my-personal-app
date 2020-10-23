@@ -23,12 +23,12 @@ export class coachs1603239390948 implements MigrationInterface {
             },
             {
                 name: 'coach_name',
-                type: 'integer',
+                type: 'varchar',
                 isNullable: false,
             },
             {
-                name: 'coach_pontuation',
-                type: 'integer',
+                name: 'coach_nickname',
+                type: 'varchar',
                 isNullable: false,
             },
         ]

@@ -12,6 +12,7 @@ export interface TeamMatchI{
     teamId: number
     matchId: number
     roundId: number
+    coachId: number
     firstBan: number
     secondBan: number
     thirdBan: number

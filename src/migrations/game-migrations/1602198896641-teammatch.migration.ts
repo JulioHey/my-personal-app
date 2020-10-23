@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class teammatch1602198896641 implements MigrationInterface {
+export class teammatch1603239921943 implements MigrationInterface {
     
     
     private table = new Table({
@@ -25,6 +25,11 @@ export class teammatch1602198896641 implements MigrationInterface {
             },
             {
                 name: "round_id",
+                type: "integer",
+                isNullable: false,
+            },
+            {
+                name: "coach_id",
                 type: "integer",
                 isNullable: false,
             },            
@@ -101,6 +106,14 @@ export class teammatch1602198896641 implements MigrationInterface {
         referencedTableName: 'rounds',
     });
 
+    private foreignKey7 = new TableForeignKey({
+        columnNames: [ 'coach_id' ],
+        referencedColumnNames: ['coach_id'],
+        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        referencedTableName: 'coachs',
+    });
+
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(this.table);
         await queryRunner.createForeignKey('team_matches', this.foreignKey1);
@@ -109,6 +122,7 @@ export class teammatch1602198896641 implements MigrationInterface {
         await queryRunner.createForeignKey('team_matches', this.foreignKey4);
         await queryRunner.createForeignKey('team_matches', this.foreignKey5);
         await queryRunner.createForeignKey('team_matches', this.foreignKey6);
+        await queryRunner.createForeignKey('team_matches', this.foreignKey7);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
@@ -119,6 +133,7 @@ export class teammatch1602198896641 implements MigrationInterface {
         await queryRunner.dropForeignKey('team_matches', this.foreignKey4);
         await queryRunner.dropForeignKey('team_matches', this.foreignKey5);
         await queryRunner.dropForeignKey('team_matches', this.foreignKey6);
+        await queryRunner.dropForeignKey('team_matches', this.foreignKey7);
     }
 
 }

@@ -19,6 +19,9 @@ export class TeamStatusModel extends BaseEntity implements TeamStatusI{
 
     @Column({name: "team_barons"})
     teamBarons: number;
+    
+    @Column({name: "team_dragons"})
+    teamDragons: number;
 
     @OneToOne(
         () => TeamMatchModel,

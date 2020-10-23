@@ -6,6 +6,7 @@ export interface TeamStatusI {
     teamTowers: number
     teamBarricades: number
     teamBarons: number
+    teamDragons: number
 }
 
 export interface TeamStatusSI extends TeamStatusI, ModelI{}

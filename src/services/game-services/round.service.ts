@@ -29,7 +29,8 @@ export class RoundService extends BaseService<RoundSI>{
         const resource = await this.model.repo.create({roundNumber, roundDate});
         await this.model.repo.save(resource);
 
-        const newMatches = await Promise.all(matches.map(async (match, index) =>{
+        const newMatches = await Promise.all(
+            matches.map(async (match, index) =>{
             const newMatch = await this.MatchService.post({
                 blueSideTeam: match.blueSideTeam,
                 redSideTeam: match.redSideTeam,
@@ -38,10 +39,10 @@ export class RoundService extends BaseService<RoundSI>{
             });
 
 
-            return (newMatch);
+            return newMatch;
         }));
 
-        await this.PlayerMatchService.updatePlayersValue();
+        await this.PlayerMatchService.updatePlayersValue(roundNumber);
 
         return {resource, newMatches}
     }
