@@ -75,7 +75,7 @@ export class UserEscalationService extends BaseService<UserEscalationSI>{
 
         }));
 
-        await this.UserTeamService.calcNewPatrymony(userId,  deltaPatrymony)
+        await this.UserTeamService.calcNewPatrymony(userId, deltaPatrymony);
 
         return sum;
     }

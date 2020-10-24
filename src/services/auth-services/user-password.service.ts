@@ -28,13 +28,11 @@ export class UserPasswordService extends BaseService<UserSI>{
 
         const User = await this.user.get({userName: userName})
         if (User[0]) {
-            console.log(User)
             return {Error: "user already exist"}
         }
 
         const newUser = await this.user.post(userModel)
 
-        console.log(newUser)
         const {userId} = newUser;
 
         const passwordModel = {
@@ -55,7 +53,6 @@ export class UserPasswordService extends BaseService<UserSI>{
         const Passwords = await this.password.get({userId: userId})
 
         const matchPassword = await compare(userPassword, Passwords[0].password)
-        console.log(matchPassword)
 
         if (matchPassword) {
             return User[0]

@@ -52,7 +52,7 @@ TODO:
 
     -- [] Add all AppEntities;
         -- [x] Add all UserTeam;
-            -- [] Update UserTeam patrimony with the changes on the player values;
+            -- [x] Update UserTeam patrimony with the changes on the player values;
             -- [] Update total pontuation in the tournament
         -- [x] Add all UserFriends;
             -- [x] Get UserFriends with UserID;

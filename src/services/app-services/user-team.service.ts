@@ -17,6 +17,6 @@ export class UserTeamService extends BaseService<UserTeamSI>{
 
         const newValue = Number(userTeam.userTeamPatrimony) + Number(delta);
 
-        await this.update(userId, { userTeamPatrimony: newValue });
+        await this.update(userId, { userTeamPatrimony: Math.round(newValue) });
     }
 }

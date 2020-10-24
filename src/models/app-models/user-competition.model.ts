@@ -18,6 +18,10 @@ export class UserCompetitionModel extends BaseEntity implements UserCompetitionI
     @Column({name: "user_id"})
     userId: string;
 
+    
+    @Column({name: "user_competition_pontuation"})
+    userCompetitionPontuation: number;
+
     @ManyToOne(
         () => CompetitionModel,
         competition => competition.userConnection,

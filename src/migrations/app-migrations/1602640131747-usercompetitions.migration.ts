@@ -18,6 +18,12 @@ export class userCompetitions1602640131747 implements MigrationInterface {
             {
                 name: "competition_id",
                 type: "uuid",
+            },
+            {
+                name: "user_competition_pontuation",
+                type: "decimal",
+                precision: 6,
+                scale: 2
             }
         ]
     });
