@@ -2,8 +2,6 @@ require('dotenv').config({
     path: process.env.NODE_ENV === "test" ? ".env.test" : ".env"
 });
 
-console.log(process.env.DB_LOCATION ,process.env.DB_NAME, process.env.DB_DIALECT, process.env.DB_PASS)
-
 
 module.exports = {
     type: process.env.DB_DIALECT || "postgres",

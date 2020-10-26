@@ -35,7 +35,6 @@
     "typeorm:drop": "./node_modules/.bin/ts-node ./node_modules/typeorm/cli.js schema:drop",
     "typeorm:createm": "./node_modules/.bin/ts-node ./node_modules/typeorm/cli.js migration:create",
     "typeorm:createe": "./node_modules/.bin/ts-node ./node_modules/typeorm/cli.js entity:create",
-    "pretest": "NODE_ENV=test ts-node ./node_modules/typeorm/cli.js migration:run",
-    "test": "NODE_ENV=test ts-node jest"
+    "test": "NODE_ENV=test jest"
   }
 }
