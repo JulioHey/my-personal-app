@@ -11,19 +11,23 @@ export default class BaseController{
 
     post = async(req: Request, res: Response) => {
         try {
-            const resource = await this.service.post(req.body)
+            const resource = await this.service.post(req.body);
+
+            if (resource.Error) {
+                return res.status(401).json(resource.Error)
+            } 
             return res.send(resource);
         } catch(err){
-            return res.json(err)
+            return res.status(401).json(err)
         }
     }
 
     get = async(req: Request, res: Response) => {
         try {
-            const resource = await this.service.get(req.body)
+            const resource = await this.service.get(req.body);
             return res.send(resource)
         } catch(err){
-            return res.json(err)
+            return res.status(401).json(err)
         }
     }
 
@@ -42,8 +46,8 @@ export default class BaseController{
 
     remove = async (req: Request, res: Response) => {
         try{
-            const { id } = req.params
-            const resource = await this.service.remove(id)
+            const { id } = req.params;
+            const resource = await this.service.remove(id);
             return res.send(resource)
         } catch(err) {
             return res.json(err)

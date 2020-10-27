@@ -1,2 +1,7 @@
-/node_modules
-ormconfig.json
+ormconfig.ts
+
+.env
+
+.env.test
+
+node_modules

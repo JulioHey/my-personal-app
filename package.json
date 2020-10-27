@@ -7,6 +7,7 @@
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
+    "@types/supertest": "^2.0.10",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -17,6 +18,8 @@
     "nodemon": "^2.0.4",
     "pg": "^8.4.0",
     "sqlite3": "^5.0.0",
+    "supertest": "^5.0.0",
+    "ts-jest": "^26.4.3",
     "ts-node-dev": "^1.0.0-pre.63",
     "tsyringe": "^4.3.0",
     "typeorm": "^0.2.28",
@@ -35,6 +38,7 @@
     "typeorm:drop": "./node_modules/.bin/ts-node ./node_modules/typeorm/cli.js schema:drop",
     "typeorm:createm": "./node_modules/.bin/ts-node ./node_modules/typeorm/cli.js migration:create",
     "typeorm:createe": "./node_modules/.bin/ts-node ./node_modules/typeorm/cli.js entity:create",
+    "migrationtest": "NODE_ENV=test ts-node ./node_modules/typeorm/cli.js migration:run",
     "test": "NODE_ENV=test jest"
   }
 }

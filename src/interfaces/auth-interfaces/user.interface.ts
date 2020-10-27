@@ -7,7 +7,5 @@ export interface UserI {
     userEmail: string
 }
 
-export interface UserSI extends ModelI{
-    userName: string
-    userEmail: string
+export interface UserSI extends UserI, ModelI{
 }

@@ -1,19 +1,18 @@
-import express from 'express';
-import cors from 'cors'
 import 'reflect-metadata';
 
 import {createConnection} from 'typeorm';
 
 import appRouter from './routes';
+import App from './app';
 
-const app = express();
+require('dotenv').config({
+    path: process.env.NODE_ENV === "test" ? ".env.test" : "env"
+});
+
+const app = new App(3333, appRouter);
 
 createConnection().then(connection => {
-    app.use(express.json());
-    app.use(cors());
+    app.listen();
+});
 
-    app.use(appRouter)
-
-    app.listen(3333);
-    console.log(`Server is running in port 3333, and is ${connection.isConnected}`)
-})
+export default app;

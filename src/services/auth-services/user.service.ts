@@ -17,18 +17,19 @@ export class UserService extends BaseService<UserSI>{
 
     post = async (data) => {
         const {userName, userEmail, roles} = data;
-
-        console.log(roles)
         const existRole = await this.role.model.repo.findByIds(roles);
 
-        console.log(existRole)
-
-        if (existRole) {
+        if (existRole[0]) {
             const newUser = await this.model.repo.create({userName, userEmail, roles: existRole});
-            await this.model.repo.save(newUser)
-            return newUser
+            await this.model.repo.save(newUser);
+    
+            return newUser;
         } else {
-            return {error: "A role is needed"}
+            const newUser = await this.model.repo.create({userName, userEmail, roles: []});
+            await this.model.repo.save(newUser);
+    
+            return newUser;
         }
+
     }
 }

@@ -24,21 +24,22 @@ export class UserPasswordService extends BaseService<UserSI>{
             userName: userName,
             userEmail: userEmail,
             roles: roles
-        }
+        };
+    
+        const User = await this.user.get({userName: userName});
 
-        const User = await this.user.get({userName: userName})
         if (User[0]) {
-            return {Error: "user already exist"}
+            return {Error: "user already exist"};
         }
-
-        const newUser = await this.user.post(userModel)
+        
+        const newUser = await this.user.post(userModel);
 
         const {userId} = newUser;
 
         const passwordModel = {
             userId,
             password: userPassword
-        }
+        };
 
         await this.password.post(passwordModel);
 

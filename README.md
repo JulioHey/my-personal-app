@@ -74,3 +74,7 @@ TODO:
     -- [] Implement Authentication;
         -- [x] Add admin middlewares;
         -- [] User authentication to edit their rows;
+
+    -- [] Testes
+        -- [] Session
+            -- [] Changes migrations and users with increment method uuid;

@@ -12,13 +12,11 @@ export class LoginController extends BaseController {
         super(UserPasswordService)
     }
 
-    create =  async(request: Request, response: Response) => {
+    create =  async (request: Request, response: Response) => {
         try {
             const body = request.body;
-            console.log(body)
 
             const userPassword = await hash(body.userPassword, 8);
-            console.log(userPassword)
 
             const data = {
                 userName: body.userName, 
@@ -26,14 +24,16 @@ export class LoginController extends BaseController {
                 userPassword: userPassword,  
                 roles: body.roles
             }
-            console.log(data)
 
             const User = await this.UserPasswordService.create(data);
 
+            if (User.Error) {
+                return response.status(401).json(User.Error)
+            }
 
-            return response.json(User)
+            return response.json(User).send();
         } catch(error) {
-            return response.json(error)
+            return response.status(401).json(error)
         }
     }
 
@@ -49,7 +49,7 @@ export class LoginController extends BaseController {
                 expiresIn: '1d'
             });
 
-            return response.json({User, token})
+            return response.json({User, token}).send()
         } catch(err) {
             return response.json(err)
         }

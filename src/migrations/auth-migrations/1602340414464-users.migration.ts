@@ -1,15 +1,21 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
+require('dotenv').config({
+    path: process.env.NODE_ENV === "test" ? ".env.test" : "env"
+});
+
+
 export class users1602340414464 implements MigrationInterface {
     private table = new Table({
         name: "users",
         columns:[
             {
                 name: "user_id",
-                type: "uuid",
+                type: process.env.NODE_ENV === "test" ? "integer" : "uuid",
                 isPrimary: true,
-                generationStrategy: "uuid",
-                default: "uuid_generate_v4()"
+                isGenerated: true,
+                generationStrategy: process.env.NODE_ENV === "test" ? "increment" : "uuid",
+                default: process.env.NODE_ENV === "test" ? "1" : "uuid_generate_v4()"
             },
             {
                 name: "email",
