@@ -1,12 +1,17 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
+require('dotenv').config({
+    path: process.env.NODE_ENV === "test" ? ".env.test" : "env"
+});
+
+
 export class passwords1602356860009 implements MigrationInterface {
     private table = new Table({
         name: "passwords",
         columns:[
             {
                 name: "user_id",
-                type: "uuid",
+                type: process.env.NODE_ENV === "test" ? "integer" : "uuid",
                 isPrimary: true,
             },
             {

@@ -9,7 +9,7 @@ import { UserModel } from "./user.model";
 @Entity({name: "passwords"})
 export class PasswordModel extends BaseEntity implements PasswordI{
     @PrimaryColumn({name: "user_id"})
-    userId: string;
+    userId: number | string;
 
     @Column({name: "user_password"})
     password: string;

@@ -1,5 +1,6 @@
 import { compare } from "bcryptjs";
 import { autoInjectable, container, injectable } from "tsyringe";
+import { convertCompilerOptionsFromJson } from "typescript";
 import { UserSI } from "../../interfaces/auth-interfaces/user.interface";
 import { UserRepo } from "../../models/auth-models/user.model";
 import BaseService from "../base.service";
@@ -53,12 +54,13 @@ export class UserPasswordService extends BaseService<UserSI>{
 
         const Passwords = await this.password.get({userId: userId})
 
-        const matchPassword = await compare(userPassword, Passwords[0].password)
+        const matchPassword = await compare(userPassword, Passwords[0].password);
+
 
         if (matchPassword) {
             return User[0]
         } else {
-            return {error: "LoginFailed"}
+            return {Error: "LoginFailed"}
         }
     }
 }

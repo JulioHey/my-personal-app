@@ -15,7 +15,7 @@ import { RoleModel } from "./role.model";
 @Entity({name: "users"})
 export class UserModel extends BaseEntity implements UserI{
     @PrimaryGeneratedColumn({name: "user_id"})
-    userId: string
+    userId: number | string
 
     @Column({name: "user_name"})
     userName: string;

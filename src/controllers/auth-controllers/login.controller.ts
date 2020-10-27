@@ -44,14 +44,18 @@ export class LoginController extends BaseController {
 
             const User = await this.UserPasswordService.login(userName, userPassword);
 
-            const token = sign({}, "07e61acbf651a52f6e9e21e81f7bed82", {
-                subject: User.userId,
+            if (User.Error) {
+                return response.status(400).json(User).send();
+            };
+
+            const token = await sign({}, "07e61acbf651a52f6e9e21e81f7bed82", {
+                subject: String(User.userId),
                 expiresIn: '1d'
             });
 
-            return response.json({User, token}).send()
+            return response.json({User, token}).send();
         } catch(err) {
-            return response.json(err)
+            return response.status(400).json(err)
         }
     }
 }

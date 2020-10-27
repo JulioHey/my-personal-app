@@ -3,7 +3,7 @@ import { ModelI } from "../model.interface";
 
 export interface UserI {
     userName: string
-    userId: string
+    userId: number | string
     userEmail: string
 }
 

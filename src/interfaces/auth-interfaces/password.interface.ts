@@ -2,7 +2,7 @@ import { ModelI } from "../model.interface";
 
 
 export interface PasswordI {
-    userId: string
+    userId: number | string
     password: string
 }
 
