@@ -59,8 +59,6 @@ describe("Authentication", () => {
             ]
         });
 
-        console.log(response.body);
-
         expect(response.status).toBe(200);
     });
 
