@@ -1,22 +1,27 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
+import dotenv from 'dotenv';
+
 export class permissions1602442859833 implements MigrationInterface {
     private table = new Table ({
         name: "permissions",
         columns: [
             {
                 name: "permission_id",
-                type: "uuid",
+                type: process.env.NODE_ENV === "test" ? "integer" : "uuid",
                 isPrimary: true,
-                generationStrategy: "uuid",
-                default: "uuid_generate_v4()",
+                isGenerated: true,
+                generationStrategy: process.env.NODE_ENV === "test" ? "increment" : "uuid",
+                default: process.env.NODE_ENV === "test" ? "1" : "uuid_generate_v4()"
             },
             {
                 name: "permission_name",
                 type: "varchar",
+                isUnique: true,
             },
             {
                 name: "permission_description",
+                isUnique: true,
                 type: "varchar",
             },
         ]

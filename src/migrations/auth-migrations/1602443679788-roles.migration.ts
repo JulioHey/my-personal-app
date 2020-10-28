@@ -1,15 +1,18 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
+import dotenv from 'dotenv';
+
 export class roles1602443679788 implements MigrationInterface {
     private table = new Table({
         name: "roles",
         columns: [
             {
                 name: 'role_id',
-                type: 'uuid',
+                type: process.env.NODE_ENV === "test" ? "integer" : "uuid",
                 isPrimary: true,
-                generationStrategy: 'uuid',
-                default: 'uuid_generate_v4()'
+                isGenerated: true,
+                generationStrategy: process.env.NODE_ENV === "test" ? "increment" : "uuid",
+                default: process.env.NODE_ENV === "test" ? "1" : "uuid_generate_v4()"
             },
             {
                 name: 'role_name',
