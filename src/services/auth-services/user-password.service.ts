@@ -27,7 +27,7 @@ export class UserPasswordService extends BaseService<UserSI>{
             roles: roles
         };
     
-        const User = await this.user.get({userName: userName});
+        const User = await this.user.get({userEmail});
 
         if (User[0]) {
             return {Error: "user already exist"};

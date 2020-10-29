@@ -2,7 +2,7 @@ import { ModelI } from "../model.interface";
 
 
 export interface PermissionI {
-    permissionId: string
+    permissionId: string | number
     permissionName: string
     permissionDescription: string
 }

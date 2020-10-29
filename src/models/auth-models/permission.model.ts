@@ -8,7 +8,7 @@ import RepoI from "../../interfaces/model.interface";
 @Entity({name: "permissions"})
 export class PermissionModel extends BaseEntity implements PermissionI{
     @PrimaryGeneratedColumn({name: "permission_id"})
-    permissionId: string;
+    permissionId: string | number;
 
     @Column({name: "permission_name"})
     permissionName: string;

@@ -2,7 +2,7 @@ import { ModelI } from "../model.interface";
 
 
 export interface RoleI {
-    roleId: string
+    roleId: number | string
     roleName: string
     roleDescription: string
 }

@@ -1,14 +1,15 @@
+import "reflect-metadata";
 import express from 'express';
 import cors from 'cors';
 
-class App {
+export class App {
     public app: express.Application;
     public port: number;
 
-    constructor (port: number, router) {
+    constructor (router, port?: number) {
         this.app = express();
         this.port = port;
-
+        
         this.initializeMiddlewares();
         this.initializeRoutes(router);
     }
@@ -23,10 +24,8 @@ class App {
     }
 
     public listen() {
-        this.app.listen(this.port, () => {
+        return this.app.listen(this.port, () => {
           console.log(`App listening on the port ${this.port}`);
         });
       }
 }
-
-export default App;

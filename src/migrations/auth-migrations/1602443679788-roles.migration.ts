@@ -6,14 +6,16 @@ export class roles1602443679788 implements MigrationInterface {
         columns: [
             {
                 name: 'role_id',
-                type: 'uuid',
+                type: process.env.NODE_ENV === "test" ? "integer" : "uuid",
                 isPrimary: true,
-                generationStrategy: 'uuid',
-                default: 'uuid_generate_v4()'
+                isGenerated: true,
+                generationStrategy: process.env.NODE_ENV === "test" ? "increment" : "uuid",
+                default: process.env.NODE_ENV === "test" ? "1" : "uuid_generate_v4()"
             },
             {
                 name: 'role_name',
-                type: 'varchar'
+                type: 'varchar',
+                isUnique: true,
             },
             {
                 name: 'role_description',

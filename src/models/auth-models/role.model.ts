@@ -9,7 +9,7 @@ import { PermissionModel } from "./permission.model";
 @Entity({name: "roles"})
 export class RoleModel extends BaseEntity implements RoleI{
     @PrimaryGeneratedColumn({name: "role_id"})
-    roleId: string;
+    roleId: number | string;
 
     @Column({name: "role_name"})
     roleName: string;
