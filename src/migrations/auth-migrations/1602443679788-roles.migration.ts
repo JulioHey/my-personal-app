@@ -16,7 +16,8 @@ export class roles1602443679788 implements MigrationInterface {
             },
             {
                 name: 'role_name',
-                type: 'varchar'
+                type: 'varchar',
+                isUnique: true,
             },
             {
                 name: 'role_description',

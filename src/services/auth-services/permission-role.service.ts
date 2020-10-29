@@ -25,13 +25,15 @@ export class PermissionRoleService extends BaseService<RoleSI>{
 
         if (existRole[0]) {
             return ({
-                error: "Role already exists!"
+                Error: "Roll already exists"
             })
         };
 
-
-        console.log()
         const existPermissions = await this.permission.model.repo.findByIds(permissions);
+
+        // if (!existPermissions[0] && permissions[0]) {
+        //     return {Error: "should pass a valid permission or none"}
+        // }
 
         const role = this.role.post({
             roleName,

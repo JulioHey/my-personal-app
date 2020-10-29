@@ -1,18 +1,24 @@
-import {TestFactory} from '../factory';
+import {App} from '../../../src/app';
+import appRouter from '../../../src/routes';
+import request from 'supertest';
+import { createConnection } from 'typeorm';
+import {options} from '../../database.service';
 
 describe("Authentication", () => {
-    const factory: TestFactory = new TestFactory();
+    const app = new App(appRouter);
+
+    beforeAll(async () => {
+        await createConnection(options);
+    });
 
     beforeEach( async () => {
-        const response = await factory.app
+        const {body: users} = await request(app.app)
             .get("/user")
             .send();
         
-        const users = response.body;
-
         if (users[0]) {
             await Promise.all(users.map( async user => {
-                await factory.app
+                await request(app.app)
                     .delete(`/user/${user.userId}`)
                     .send()
             })
@@ -20,16 +26,10 @@ describe("Authentication", () => {
         }
     });
 
-    beforeAll(async () => {
-        await factory.init();
-    });
-
-    afterAll(async () => {
-        await factory.close();
-    });
-
-    it("should fail if user already exists", async () => {
-        await factory.app.post("/user").send({
+    test("should fail if user already exists", async () => {
+        const {body} = await request(app.app)
+            .post("/user")
+            .send({
             "userName": "ju2l1io",
             "userEmail": "a@gmai3l",
             "userPassword": "12324",
@@ -37,7 +37,9 @@ describe("Authentication", () => {
             ]
         });
 
-        const response = await factory.app.post("/user").send({
+        const response = await request(app.app)
+            .post("/user")
+            .send({
             "userName": "ju2l1io",
             "userEmail": "a@gmai3l",
             "userPassword": "12324",
@@ -45,13 +47,12 @@ describe("Authentication", () => {
             ]
         });
 
-        
         expect(response.status).toBe(401);
     }
     );
 
-    it("should create nwe user if user dont exist", async () => {
-        const response = await factory.app.post("/user").send({
+    test("should create nwe user if user dont exist", async () => {
+        const response = await request(app.app).post("/user").send({
             "userName": "ju2l1io",
             "userEmail": "a@gmai3l",
             "userPassword": "12324",
@@ -62,8 +63,8 @@ describe("Authentication", () => {
         expect(response.status).toBe(200);
     });
 
-    it("should not login if user or password are wrong", async () => {
-        await factory.app.post("/user").send({
+    test("should not login if user or password are wrong", async () => {
+        await request(app.app).post("/user").send({
             "userName": "ju2l1io",
             "userEmail": "a@gmai3l",
             "userPassword": "12324",
@@ -71,7 +72,7 @@ describe("Authentication", () => {
             ]
         });
 
-        const response = await factory.app.post("/user/login").send({
+        const response = await request(app.app).post("/user/login").send({
             "userName": "ju2l1io",
             "userPassword": "1232456",
         });
@@ -79,8 +80,8 @@ describe("Authentication", () => {
         expect(response.status).toBe(400);
     });
 
-    it("should login if user and password are correct", async () => {
-        await factory.app.post("/user").send({
+    test("should login if user and password are correct", async () => {
+        await request(app.app).post("/user").send({
             "userName": "ju2lio",
             "userEmail": "a@gmai3l",
             "userPassword": "12343",
@@ -88,7 +89,7 @@ describe("Authentication", () => {
             ]
         });
 
-        const response = await factory.app.post("/user/login")
+        const response = await request(app.app).post("/user/login")
             .send({
                 "userName": "ju2lio",
                 "userPassword": "12343"

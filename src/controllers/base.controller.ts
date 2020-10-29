@@ -15,8 +15,8 @@ export default class BaseController{
 
             if (resource.Error) {
                 return res.status(401).json(resource.Error)
-            } 
-            return res.send(resource);
+            }
+            return res.status(200).send(resource);
         } catch(err){
             return res.status(401).json(err)
         }

@@ -1,6 +1,8 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-import dotenv from 'dotenv';
+require('dotenv').config({
+    path: process.env.NODE_ENV === "test" ? ".env.test" : "env"
+});
 
 export class permissions1602442859833 implements MigrationInterface {
     private table = new Table ({

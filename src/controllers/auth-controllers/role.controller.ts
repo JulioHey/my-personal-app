@@ -12,10 +12,15 @@ export class RoleController extends BaseController {
 
     create = async(request: Request, response: Response) => {
         try {
-            const role = await this.PermissionRoleService.create(request.body)
-            return response.json(role)
+            const role = await this.PermissionRoleService.create(request.body);
+
+            if (role.Error) {
+                return response.status(401).json(role.Error);
+            }
+
+            return response.json(role);
         } catch(error) {
-            return response.json(error)
+            return response.status(401).json(error);
         }
     }
 }
