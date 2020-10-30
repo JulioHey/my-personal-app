@@ -81,7 +81,6 @@ describe("Teams", () => {
 
         expect(response.status).toBe(401);
     });
-
     
     it("should update team if it exist", async () => {
         const {body: team} = await request(app.app)

@@ -13,19 +13,6 @@ describe("Roles", () => {
     });
 
     beforeEach( async () => {
-        const {body: permissions} = await request(app.app)
-            .get("/permission")
-            .send({});
-        
-        if (permissions[0]) {
-            await Promise.all(await permissions.map( async permission => {
-                const {body} = await request(app.app)
-                    .del(`/permission/${permission.permissionId}`)
-                    .send({});
-            })
-            );
-        }
-
         const {body: roles} = await request(app.app)
             .get("/role")
             .send();
@@ -44,17 +31,16 @@ describe("Roles", () => {
         await connection.close();
     });
 
-    it("should not fail if permission doesnt exists", async () => {
+    it("should create entity if dont exist", async () => {
         const response = await request(app.app).post("/role").send({
             "roleName": "Admin",
             "roleDescription": "Admin",
-            "permissions": []
         });
         
         expect(response.status).toBe(200);
     });
 
-    it("should fail if permission exists", async () => {
+    it("should fail if entity already exists", async () => {
         await request(app.app)
             .post("/role")
             .send({
@@ -74,41 +60,65 @@ describe("Roles", () => {
         expect(response.status).toBe(401);
     });
 
-    it("should create role with permission", async () => {
-        const {body: permission} = await request(app.app)
-            .post("/permission")
-            .send({
-            "permissionName": "Admin",
-            "permissionDescription": "Admin"
-        });
-        
-        const response = await request(app.app)
-            .post("/role")
-            .send({
-            "roleName": "Admin",
-            "roleDescription": "Admin",
-            "permissions": [`${permission.permissionId}`]
-        });
-
-        let isPermission;
-
-        if (!response.body.permission[0]) {
-            console.log(permission, response.body)
-        } else {
-            isPermission = permission.permissionId == response.body.permission[0].permissionId
-        }
-        
-        expect(isPermission).toBe(true);
-    });
-
     it("should not update role if there is no entity", async () => {
         const {status} = await request(app.app)
             .put(`/role/f`)
             .send({
-                "roleId": "f",
                 "roleDescription": "Admin",
             });
         
         expect(status).toBe(401);
     });
+   
+    it("should update if role exists", async () => {
+        const {body: role} = await request(app.app)
+            .post("/role")
+            .send({
+            "roleName": "Admin",
+            "roleDescription": "Admin",
+        });
+        
+        const response = await request(app.app)
+            .put(`/role/${role.roleId}`)
+            .send({
+            "roleName": "Admin",
+            "roleDescription": "Julio Lindo",
+        });
+
+        expect(response.status).toBe(200);
+    });
+
+    it("should fail if miss information", async () => {
+        const {status} = await request(app.app)
+            .post("/role")
+            .send({
+            "roleName": "Admin",
+        });
+
+        expect(status).toBe(401);
+    });
+
+    it(" delete if entity do exist", async () => {
+        const {body: role} = await request(app.app)
+            .post("/role")
+            .send({
+            "roleName": "Admin",
+            "roleDescription": "Admin",
+        });
+
+        const {status} = await request(app.app)
+            .delete(`/role/${role.roleId}`)
+            .send({});
+
+        expect(status).toBe(200);
+    });
+
+    it("fail delete if entity dont exist", async () => {
+        const {status} = await request(app.app)
+            .delete(`/role/f`)
+            .send({});
+
+        expect(status).toBe(401);
+    });
+
 });

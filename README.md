@@ -44,6 +44,7 @@ TODO:
         -- [x] Permission
         -- [x] PermissionRoles
         -- [x] Password
+            -- [] Add change password
 
         -- [x] Login and Creation of User 
         -- [x] Add crypto to password
@@ -76,5 +77,59 @@ TODO:
         -- [] User authentication to edit their rows;
 
     -- [] Testes
-        -- [] Session
+        -- [] Overall changes
             -- [] Changes migrations and users with increment method uuid;
+        -- [] Auth Testes
+            -- [] Session
+                -- [x] Add entity
+                -- [x] Login
+                -- [x] Fail if entity already exists
+                -- [x] Fail login if any information is wrong
+                -- [] Change password
+                -- [] Fail update id dont exists
+                -- [] Should fail if miss information
+            -- [x] Role
+                -- [x] Add entity
+                -- [x] Fail if entity already exists
+                -- [x] Update if exist
+                -- [x] Fail update id dont exists
+                -- [x] Should fail if miss information
+                -- [x] Should fail delete if dont exist
+                -- [x] Should delete if exists
+            -- [x] Permission
+                -- [x] Add entity;
+                -- [x] Fail if entity already exists;
+                -- [x] Update if exist;
+                -- [x] Fail update id dont exists
+                -- [x] Should fail if miss information
+                -- [x] Should delete if exists
+                -- [x] Should fail delete if dont exist
+            
+        -- [] Game testes
+            -- [x] Team
+                -- [x] Add entity;
+                -- [x] Fail if entity already exists;
+                -- [x] Update if exist;
+                -- [x] Fail update id dont exists
+                -- [x] Should fail if miss information
+                -- [x] Should delete if exists
+                -- [x] Should fail delete if dont exist
+
+            -- [x] Champion
+                -- [x] Add entity;
+                -- [x] Fail if entity already exists;
+                -- [x] Update if exist;
+                -- [x] Fail update id dont exists
+                -- [x] Should fail if miss information
+                -- [x] Should delete if exists
+                -- [x] Should fail delete if dont exist
+
+            -- [x] Round
+                -- [x] Add entity;
+                -- [x] Fail if entity already exists;
+                -- [x] Update if exist;
+                -- [x] Fail update id dont exists
+                -- [x] Should fail if miss information
+                -- [x] Should delete if exists
+                -- [x] Should fail delete if dont exist
+

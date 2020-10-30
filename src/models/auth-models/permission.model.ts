@@ -1,7 +1,8 @@
 import { injectable, singleton } from "tsyringe";
-import { BaseEntity, Column, Entity, getRepository, PrimaryGeneratedColumn, Repository } from "typeorm";
+import { BaseEntity, Column, Entity, getRepository, OneToMany, PrimaryGeneratedColumn, Repository } from "typeorm";
 import { PermissionI } from "../../interfaces/auth-interfaces/permission.interface";
 import RepoI from "../../interfaces/model.interface";
+import { PermissionRoleModel } from "./permission-role.model";
 
 
 @injectable()
@@ -15,6 +16,12 @@ export class PermissionModel extends BaseEntity implements PermissionI{
 
     @Column({name: "permission_description"})
     permissionDescription: string;
+
+    @OneToMany(
+        () => PermissionRoleModel,
+        permissionRole => permissionRole.permissionConnection
+    )
+    roleConnection: Promise<PermissionRoleModel[]>;
 }
 
 @singleton()

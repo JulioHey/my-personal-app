@@ -8,7 +8,7 @@ const roleController = container.resolve(RoleController);
 
 roleRouter.get("/", roleController.get);
 roleRouter.get("/:id", roleController.getById);
-roleRouter.post("/", roleController.create);
+roleRouter.post("/", roleController.post);
 roleRouter.delete("/:id", roleController.remove);
 roleRouter.put("/:id", roleController.update);
 

@@ -26,28 +26,36 @@ export class RoundService extends BaseService<RoundSI>{
 
     
     create = async (data: {roundNumber: number, roundDate: string ,matches: DeepPartial<MatchI>[]}) => {
-        const {roundNumber, roundDate, matches} = data;
+        try {
+            const {roundNumber, roundDate, matches} = data;
 
 
-        const resource = await this.model.repo.create({roundNumber, roundDate});
-        await this.model.repo.save(resource);
+            const resource = await this.model.repo.create({roundNumber, roundDate});
+            await this.model.repo.save(resource);
 
-        const newMatches = await Promise.all(
-            matches.map(async (match, index) =>{
-            const newMatch = await this.MatchService.post({
-                blueSideTeam: match.blueSideTeam,
-                redSideTeam: match.redSideTeam,
-                roundId: resource.roundId,
-                matchPosition: (index + 1)
-            });
-
-
-            return newMatch;
-        }));
-
-        await this.PlayerMatchService.updatePlayersValue();
-        await this.CoachMatchService.updateCoachsValue();
-        
-        return {resource, newMatches}
+            let newMatches;
+            if (matches) {
+                newMatches = await Promise.all(
+                    matches.map(async (match, index) =>{
+                    const newMatch = await this.MatchService.post({
+                        blueSideTeam: match.blueSideTeam,
+                        redSideTeam: match.redSideTeam,
+                        roundId: resource.roundId,
+                        matchPosition: (index + 1)
+                    });
+    
+    
+                    return newMatch;
+                }));
+    
+            }
+            
+            await this.PlayerMatchService.updatePlayersValue();
+            await this.CoachMatchService.updateCoachsValue();
+            
+            return {resource, newMatches}
+        } catch(err) {
+            return {Error: "Something went wrong"}
+        }
     }
 }

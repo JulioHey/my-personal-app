@@ -12,10 +12,14 @@ export class RoundController extends BaseController {
 
     post = async(req: Request, res: Response) => {
         try {
-            const resource = await this.RoundService.create(req.body)
-            return res.send(resource);
+            const resource = await this.RoundService.create(req.body);
+
+            if (resource.Error) {
+                return res.status(401).json(resource.Error)
+            }
+            return res.status(200).send(resource);
         } catch(err){
-            return res.json(err)
+            return res.status(401).json(err)
         }
     }
 }

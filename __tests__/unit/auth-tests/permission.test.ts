@@ -76,11 +76,55 @@ describe("Permissions", () => {
         const response = await request(app.app)
             .put(`/permission/${permission.permissionId}`)
             .send({
-                "permissionId": `${permission.permissionId}`,
                 "permissionName": "Julio Lindo",
                 "permissionDescription": "Admin"
             })
         
         expect(response.status).toBe(200);
     });
+
+    it("should fail to update entity if entity dont exist", async () => {
+        const response = await request(app.app)
+            .put(`/permission/f`)
+            .send({
+                "permissionName": "Julio Lindo",
+                "permissionDescription": "Admin"
+            })
+        
+        expect(response.status).toBe(401);
+    });
+
+    it("Should fail if miss information", async () => {
+        const response = await request(app.app)
+            .post("/permission")
+            .send({
+            "permissionDescription": "Admin"
+        });
+
+        expect(response.status).toBe(401);
+    });
+
+    it("Should fail delete if dont exist", async () => {
+        const response = await request(app.app)
+            .del("/permission/f")
+            .send({});
+
+        expect(response.status).toBe(401);
+    });
+
+    it("Should delete if exists", async () => {
+        const {body: permission} = await request(app.app)
+            .post("/permission")
+            .send({
+            "permissionName": "Admin",
+            "permissionDescription": "Admin"
+        });
+
+        const response = await request(app.app)
+            .del(`/permission/${permission.permissionId}`)
+            .send({})
+        
+        expect(response.status).toBe(200);
+    });
+
 });

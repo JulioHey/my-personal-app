@@ -31,7 +31,7 @@ describe("Authentication", () => {
         await connection.close();
     });
 
-    test("should fail if user already exists", async () => {
+    it("should fail if user already exists", async () => {
         const {body} = await request(app.app)
             .post("/user")
             .send({
@@ -56,7 +56,7 @@ describe("Authentication", () => {
     }
     );
 
-    test("should create nwe user if user dont exist", async () => {
+    it("should create new user if user dont exist", async () => {
         const response = await request(app.app).post("/user").send({
             "userName": "ju2l1io",
             "userEmail": "a@gmai3l",
@@ -68,7 +68,7 @@ describe("Authentication", () => {
         expect(response.status).toBe(200);
     });
 
-    test("should not login if user or password are wrong", async () => {
+    it("should not login if user or password are wrong", async () => {
         await request(app.app).post("/user").send({
             "userName": "ju2l1io",
             "userEmail": "a@gmai3l",
@@ -85,7 +85,7 @@ describe("Authentication", () => {
         expect(response.status).toBe(400);
     });
 
-    test("should login if user and password are correct", async () => {
+    it("should login if user and password are correct", async () => {
         await request(app.app).post("/user").send({
             "userName": "ju2lio",
             "userEmail": "a@gmai3l",

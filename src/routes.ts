@@ -9,6 +9,7 @@ import { userEscalationRouter } from "./routes/app-routes/user-escalation.routes
 import { friendRouter } from "./routes/app-routes/friend.routes";
 import { competitionRouter } from "./routes/app-routes/competition.routes";
 import { userCompetitionRouter } from "./routes/app-routes/user-competition.routes";
+import { permissionRoleRouter } from "./routes/auth-routes/permission-role.routes";
 
 const appRouter = Router();
 
@@ -20,6 +21,7 @@ appRouter.use("/userteam", userTeamRouter);
 appRouter.use("/user", sessionRouter);
 appRouter.use("/permission", permissionRouter);
 appRouter.use("/role", roleRouter);
+appRouter.use("/permissionrole", permissionRoleRouter);
 appRouter.use("/", adminRouter);
 appRouter.use("/", userRouter);
 

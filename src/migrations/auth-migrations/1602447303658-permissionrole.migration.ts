@@ -1,16 +1,28 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
+require('dotenv').config({
+    path: process.env.NODE_ENV === "test" ? ".env.test" : "env"
+});
+
 export class permissionrole1602447303658 implements MigrationInterface {
     private table = new Table({
         name: "permission_roles",
         columns: [
             {
+                name: "permission_role_id",
+                type: (process.env.NODE_ENV === "test" ? "integer" : "uuid"),
+                isPrimary: true,
+                isGenerated: true,
+                generationStrategy: (process.env.NODE_ENV === "test" ? "increment" : "uuid"),
+                default: (process.env.NODE_ENV === "test" ? "1" : "uuid_generate_v4()")
+            },
+            {
                 name: 'role_id',
-                type: "uuid"
+                type: (process.env.NODE_ENV === "test" ? "integer" : "uuid"),
             },
             {
                 name: 'permission_id',
-                type: "uuid"
+                type: (process.env.NODE_ENV === "test" ? "integer" : "uuid"),
             },
         ]
     });
