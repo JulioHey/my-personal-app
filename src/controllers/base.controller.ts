@@ -50,7 +50,7 @@ export default class BaseController{
             const resource = await this.service.remove(id);
             return res.send(resource)
         } catch(err) {
-            return res.json(err)
+            return res.status(401).json(err)
         }
     }
 
@@ -58,10 +58,15 @@ export default class BaseController{
         try{
             const {id} = req.params;
             const data = req.body;
-            const updatedData = await this.service.update(id, data);
+            const updatedData: any = await this.service.update(id, data);
+            
+            if (updatedData.Error) {
+                return res.status(401).json(updatedData.Error);
+            }
+
             return res.json(updatedData);
         }catch(err) {
-            return res.json(err)
+            return res.status(401).json(err)
         }
     }
 } 

@@ -12,9 +12,4 @@ export class RoleService extends BaseService<RoleSI>{
         super(modelI)
     }
 
-    asd = async() => {
-        const dale = await this.model.repo.find()
-
-        dale[0].permission;
-    }
 }

@@ -6,9 +6,10 @@ import {options} from '../../database.service';
 
 describe("Authentication", () => {
     const app = new App(appRouter);
+    let connection;
 
     beforeAll(async () => {
-        await createConnection(options);
+        connection  = await createConnection(options);
     });
 
     beforeEach( async () => {
@@ -24,6 +25,10 @@ describe("Authentication", () => {
             })
             );
         }
+    });
+
+    afterAll(async () => {
+        await connection.close();
     });
 
     test("should fail if user already exists", async () => {

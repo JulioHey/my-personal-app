@@ -7,9 +7,10 @@ import {options} from '../../database.service';
 
 describe("Permissions", () => {
     const app = new App(appRouter);
+    let connection;
 
     beforeAll(async () => {
-        await createConnection(options);
+        connection = await createConnection(options);
     });
 
     beforeEach(async () => {
@@ -28,6 +29,10 @@ describe("Permissions", () => {
         }
     });
 
+    afterAll(async () => {
+        await connection.close();
+    });
+
     it("should fail if permission already exists", async () => {
         const {body} = await request(app.app)
             .post("/permission")
@@ -41,6 +46,10 @@ describe("Permissions", () => {
             "permissionName": "Admin",
             "permissionDescription": "Admin"
         });
+
+        if (response.status == 200) {
+            console.log(body, response.body);
+        }
 
         expect(response.status).toBe(401);
     });

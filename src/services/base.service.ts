@@ -45,8 +45,14 @@ export default class BaseService<T>{
     }
 
     update = async(entityId: string, data: DeepPartial<T>) => {
+        const doesEntityExists = await this.model.repo.findOne(entityId);
+
+        if (!doesEntityExists) {
+            return {Error: "There is no entity with that id, try again"}
+        }
+
         const updatedEntity = await this.model.repo.update(entityId, data);
-        
+    
         return updatedEntity;
     };
 

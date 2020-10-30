@@ -6,42 +6,11 @@ import {options} from '../../database.service';
 
 describe("Roles", () => {
     const app = new App(appRouter);
+    let connection;
 
     beforeAll(async () => {
-        await createConnection(options);
+        connection = await createConnection(options);
     });
-
-    beforeEach(async () => {
-        const response = await request(app.app)
-        .get("/permission")
-        .send({});
-    
-        const permissions = response.body;
-
-        if (permissions[0]) {
-            await Promise.all(await permissions.map( async permission => {
-                const {body} = await request(app.app)
-                    .del(`/permission/${permission.permissionId}`)
-                    .send({});
-            })
-            );
-        }
-
-        const responsePermission = await request(app.app)
-            .get("/role")
-            .send();
-
-        const roles = responsePermission.body;
-
-        if (roles[0]) {
-            await Promise.all(await roles.map( async role => {
-                await request(app.app)
-                    .del(`/role/${String(role.roleId)}`)
-                    .send({});
-            })
-            );
-        }
-        });
 
     beforeEach( async () => {
         const {body: permissions} = await request(app.app)
@@ -71,7 +40,11 @@ describe("Roles", () => {
         }
     });
 
-    test("should not fail if permission doesnt exists", async () => {
+    afterAll(async () => {
+        await connection.close();
+    });
+
+    it("should not fail if permission doesnt exists", async () => {
         const response = await request(app.app).post("/role").send({
             "roleName": "Admin",
             "roleDescription": "Admin",
@@ -81,7 +54,7 @@ describe("Roles", () => {
         expect(response.status).toBe(200);
     });
 
-    test("should not fail if permission doesnt exists", async () => {
+    it("should fail if permission exists", async () => {
         await request(app.app)
             .post("/role")
             .send({
@@ -117,9 +90,25 @@ describe("Roles", () => {
             "permissions": [`${permission.permissionId}`]
         });
 
-        const isPermission = permission.permissionId == response.body.permission[0].permissionId
+        let isPermission;
+
+        if (!response.body.permission[0]) {
+            console.log(permission, response.body)
+        } else {
+            isPermission = permission.permissionId == response.body.permission[0].permissionId
+        }
         
         expect(isPermission).toBe(true);
     });
 
+    it("should not update role if there is no entity", async () => {
+        const {status} = await request(app.app)
+            .put(`/role/f`)
+            .send({
+                "roleId": "f",
+                "roleDescription": "Admin",
+            });
+        
+        expect(status).toBe(401);
+    });
 });
