@@ -31,7 +31,6 @@ export class permissionrole1602447303658 implements MigrationInterface {
         columnNames: ['permission_id'],
         referencedColumnNames: ['permission_id'],
         referencedTableName: 'permissions',
-        name: "fk_permissions_roles",
         onDelete: 'CASCADE',
         onUpdate: "SET NULL",
     });
@@ -41,7 +40,6 @@ export class permissionrole1602447303658 implements MigrationInterface {
         columnNames: ['role_id'],
         referencedColumnNames: ['role_id'],
         referencedTableName: 'roles',
-        name: "fk_roles_permissions",
         onDelete: 'CASCADE',
         onUpdate: "SET NULL",
     });

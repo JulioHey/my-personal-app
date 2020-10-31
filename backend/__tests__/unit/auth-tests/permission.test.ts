@@ -1,36 +1,30 @@
 import {App} from '../../../src/app';
 import appRouter from '../../../src/routes';
 import request from 'supertest';
-import { createConnection } from 'typeorm';
+import { Connection, createConnection } from 'typeorm';
 import {options} from '../../database.service';
 
 
 describe("Permissions", () => {
     const app = new App(appRouter);
-    let connection;
+    let connection: Connection;
 
-    beforeAll(async () => {
+    beforeAll(async (done) => {
         connection = await createConnection(options);
+
+        done();
     });
 
-    beforeEach(async () => {
-        const {body: permissions} = await request(app.app)
-            .get("/permission")
-            .send();
-        
-        if (permissions[0]) {
-            await Promise.all(await permissions.map(
-                async permission => {
-                    await request(app.app)
-                        .del(`/permission/${permission.permissionId}`)
-                        .send();
-                }
-            ));
-        }
+    afterEach(async (done) => {
+        await connection.query("DELETE FROM permissions");
+
+        await done();
     });
 
-    afterAll(async () => {
+    afterAll(async (done) => {
         await connection.close();
+        
+        done();
     });
 
     it("should fail if permission already exists", async () => {
@@ -61,6 +55,8 @@ describe("Permissions", () => {
             "permissionName": "Admin",
             "permissionDescription": "Admin"
         });
+
+        console.log(response.body);
 
         expect(response.status).toBe(200);
     });

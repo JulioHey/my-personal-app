@@ -1,47 +1,44 @@
 import {App} from '../../../src/app';
 import appRouter from '../../../src/routes';
 import request from 'supertest';
-import { createConnection } from 'typeorm';
+import { Connection, createConnection } from 'typeorm';
 import {options} from '../../database.service';
 
 describe("Roles", () => {
     const app = new App(appRouter);
-    let connection;
+    let connection: Connection;
 
-    beforeAll(async () => {
+    beforeAll(async (done) => {
         connection = await createConnection(options);
+
+        done();
     });
 
-    beforeEach( async () => {
-        const {body: roles} = await request(app.app)
-            .get("/role")
-            .send();
+    afterEach( async (done) => {
+        await connection.query("DELETE FROM roles");
         
-        if (roles[0]) {
-            await Promise.all(await roles.map( async role => {
-                await request(app.app)
-                    .del(`/role/${String(role.roleId)}`)
-                    .send({});
-            })
-            );
-        }
+        done();
     });
 
-    afterAll(async () => {
+    afterAll(async (done) => {
         await connection.close();
+
+        done();
     });
 
     it("should create entity if dont exist", async () => {
-        const response = await request(app.app).post("/role").send({
-            "roleName": "Admin",
-            "roleDescription": "Admin",
-        });
-        
+        const response = await request(app.app)
+            .post("/role")
+            .send({
+                "roleName": "Admin",
+                "roleDescription": "Admin",
+            });
+
         expect(response.status).toBe(200);
     });
 
     it("should fail if entity already exists", async () => {
-        await request(app.app)
+        const {body} = await request(app.app)
             .post("/role")
             .send({
             "roleName": "Admin",
@@ -56,7 +53,7 @@ describe("Roles", () => {
             "roleDescription": "Admin",
             "permissions": []
         });
-        
+
         expect(response.status).toBe(401);
     });
 

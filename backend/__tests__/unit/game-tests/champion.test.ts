@@ -8,31 +8,26 @@ describe("Champions", () => {
     const app = new App(appRouter);
     let connection;
 
-    beforeAll(async () => {
+    beforeAll(async (done) => {
         connection = await createConnection(options);
+
+        done();
     });
 
-    beforeEach(async () => {
-        const {body: champions} = await request(app.app)
-        .get("/champion")
-        .send({});
-    
-        if (champions[0]) {
-            await Promise.all(await champions.map( async champion => {
-                const {body} = await request(app.app)
-                    .del(`/champion/${champion.championId}`)
-                    .send({});
-            })
-            );
-        }
+    afterEach(async (done) => {
+        await connection.query("DELETE FROM champions");
+
+        done();
     });
 
-    afterAll(async () => {
+    afterAll(async (done) => {
         await connection.close();
+
+        done();
     });
 
     it("Add entity", async () => {
-        const {status} = await request(app.app)
+        const {status, body} = await request(app.app)
             .post("/champion")
             .send({
                 "championName": "Darius"

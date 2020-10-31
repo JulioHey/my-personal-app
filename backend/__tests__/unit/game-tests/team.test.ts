@@ -1,34 +1,29 @@
 import {App} from '../../../src/app';
 import appRouter from '../../../src/routes';
 import request from 'supertest';
-import { createConnection } from 'typeorm';
+import { Connection, createConnection } from 'typeorm';
 import {options} from '../../database.service';
 
 describe("Teams", () => {
     const app = new App(appRouter);
-    let connection;
+    let connection: Connection;
 
-    beforeAll(async () => {
+    beforeAll(async (done) => {
         connection = await createConnection(options);
+
+        done();
     });
 
-    beforeEach(async () => {
-        const {body: teams} = await request(app.app)
-        .get("/team")
-        .send({});
-    
-    if (teams[0]) {
-        await Promise.all(await teams.map( async team => {
-            const {body} = await request(app.app)
-                .del(`/team/${team.teamId}`)
-                .send({});
-        })
-        );
-    }
+    afterEach(async (done) => {
+        await connection.query("DELETE FROM teams");
+
+        done();
     })
 
-    afterAll(async () => {
+    afterAll(async (done) => {
         await connection.close();
+
+        done();
     });
 
     it("should fail if miss information", async () => {

@@ -8,31 +8,26 @@ describe("Rounds", () => {
     const app = new App(appRouter);
     let connection;
 
-    beforeAll(async () => {
+    beforeAll(async (done) => {
         connection = await createConnection(options);
+
+        done();
     });
 
-    beforeEach(async () => {
-        const {body: rounds} = await request(app.app)
-        .get("/round")
-        .send({});
-    
-    if (rounds[0]) {
-        await Promise.all(await rounds.map( async round => {
-            const {body} = await request(app.app)
-                .del(`/round/${round.roundId}`)
-                .send({});
-        })
-        );
-    }
+    afterEach(async (done) => {
+        await connection.query("DELETE FROM rounds");
+
+        done();
     })
 
-    afterAll(async () => {
+    afterAll(async (done) => {
         await connection.close();
+
+        done();
     });
 
     it("Add entity", async () => {
-        const {status} = await request(app.app)
+        const {status, body} = await request(app.app)
             .post("/round")
             .send({
                 "roundNumber": "1",
