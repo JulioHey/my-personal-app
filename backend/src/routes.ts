@@ -1,0 +1,28 @@
+import { Router } from "express";
+import {sessionRouter} from "./routes/auth-routes/session.routes";
+import {permissionRouter} from './routes/auth-routes/permission.routes';
+import {roleRouter} from "./routes/auth-routes/role.routes";
+import { adminRouter } from "./routes/admin.routes";
+import { userRouter } from "./routes/user.routes";
+import { userTeamRouter } from "./routes/app-routes/user-team.routes";
+import { userEscalationRouter } from "./routes/app-routes/user-escalation.routes";
+import { friendRouter } from "./routes/app-routes/friend.routes";
+import { competitionRouter } from "./routes/app-routes/competition.routes";
+import { userCompetitionRouter } from "./routes/app-routes/user-competition.routes";
+import { permissionRoleRouter } from "./routes/auth-routes/permission-role.routes";
+
+const appRouter = Router();
+
+appRouter.use("/usercompetition", userCompetitionRouter);
+appRouter.use("/competition", competitionRouter);
+appRouter.use("/friend", friendRouter);
+appRouter.use("/userescalation", userEscalationRouter);
+appRouter.use("/userteam", userTeamRouter);
+appRouter.use("/user", sessionRouter);
+appRouter.use("/permission", permissionRouter);
+appRouter.use("/role", roleRouter);
+appRouter.use("/permissionrole", permissionRoleRouter);
+appRouter.use("/", adminRouter);
+appRouter.use("/", userRouter);
+
+export default appRouter;
