@@ -17,12 +17,18 @@ export class LoginController extends BaseController {
             const body = request.body;
 
             const userPassword = await hash(body.userPassword, 8);
+        
+            let existRoles = [];
+
+            if (body.roles) {
+                existRoles = body.roles
+            }
 
             const data = {
                 userName: body.userName, 
                 userEmail: body.userEmail, 
                 userPassword: userPassword,  
-                roles: body.roles
+                roles: existRoles
             }
 
             const User = await this.UserPasswordService.create(data);

@@ -23,7 +23,6 @@ export class permissions1602442859833 implements MigrationInterface {
             },
             {
                 name: "permission_description",
-                isUnique: true,
                 type: "varchar",
                 isUnique: true
             },
