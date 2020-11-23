@@ -3,7 +3,7 @@ import {TouchableOpacity, View, Text} from 'react-native';
 
 export const HeaderSection = styled(View)`
     position: absolute;
-    top: 25px;
+    top: 40px;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;

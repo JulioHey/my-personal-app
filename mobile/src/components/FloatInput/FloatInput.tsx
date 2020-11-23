@@ -1,7 +1,4 @@
 import React from 'react';
-import {
-    TextInput
-} from 'react-native';
 
 import {
     Section,
@@ -13,9 +10,9 @@ interface FloatInputProps {
     name?: string
     className?: string
     value?: string
-    onChange?: Function
-    onFocus?: Function
-    onBlur?: Function
+    onChange?(e: string): void
+    onFocus?(): void
+    onBlur?(): void
     password?: boolean
     position?: string
 }

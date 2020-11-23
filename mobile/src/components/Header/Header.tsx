@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = (props) => {
     const navigation = useNavigation();
 
     const goToLoginPage = useCallback(() => {
-        navigation.navigate("Login");
+        navigation.goBack();
     }, [navigation]);
 
 

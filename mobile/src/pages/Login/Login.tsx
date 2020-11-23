@@ -14,6 +14,7 @@ import {
     CreateAccountButton,
     TitleText
 } from './styles';
+import api from '../../services/api';
 
 
 const Login: React.FC = () => {
@@ -24,6 +25,27 @@ const Login: React.FC = () => {
     const goToRegisterPage = useCallback(() => {
         navigation.navigate("Register");
     }, [navigation]);
+
+    async function handleLoginUser() {
+        // const userData = {
+        //     userName: userName.currentVlaue,
+        //     userPassword: userPassword.currentVlaue
+        // }
+
+        // try {
+        //     const response = await api.post("/user/login", userData);
+
+        //     if (response.status == 200) {
+        //         alert("Login Sucesso")
+        //     } else {
+        //         alert("Login fracasso")
+        //     }
+        // } catch(err) {
+        //     alert("Usuário ou senha incorretos...")
+        // }
+
+        navigation.navigate("AdminDashBoard");
+    }
 
     const UserNameInput = useMemo(() => {
         return (
@@ -66,7 +88,9 @@ const Login: React.FC = () => {
                     Esqueceu minha senha
                 </LinkText>
             </ForgotPasswordLink>
-            <LoginButton>
+            <LoginButton 
+                onPress={handleLoginUser}
+            >
                 <ButtonText>
                     Entrar
                 </ButtonText>

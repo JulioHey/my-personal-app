@@ -32,19 +32,11 @@ const Register: React.FC = () => {
       }, []);
 
     async function handleCreateUser() {
-        const data = new FormData();        
-
-        data.append("userEmail", userEmail.currentVlaue);
-        data.append("userName", userName.currentVlaue);
-        data.append("userPassword", userPassword.currentVlaue);
-
         const newData = {
             userEmail: userEmail.currentVlaue,
             userPassword: userPassword.currentVlaue,
             userName: userName.currentVlaue
         }
-
-        console.log(data);
 
         const response = await api.post("/user", newData);
 
@@ -115,8 +107,8 @@ const Register: React.FC = () => {
 
     return (
         <Section
-            behaviour="position"
-            className={keyBoardShown ? "keyBoardShown" : ""}
+            behavior="height"
+            nativeID={keyBoardShown ? "keyBoardShown" : ""}
         >
             <Header pageTitle="Cadastro"/>
             <TitleText>

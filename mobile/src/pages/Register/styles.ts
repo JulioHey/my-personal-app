@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import {
-    TextInput,
-    View,
     Text,
     KeyboardAvoidingView
 } from 'react-native';
@@ -13,7 +11,7 @@ export const Section = styled(KeyboardAvoidingView)`
 
     align-items: center;
     justify-content: center;
-    padding-top: ${props => props.className ? "100px" : "0"};
+    padding-top: ${props => props.nativeID ? "100px" : "0"};
 `
 
 export const RegisterButton = styled(RectButton)`
