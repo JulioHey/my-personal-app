@@ -89,6 +89,7 @@ const AdminDashBoard: React.FC = () => {
                                     blueSideTeam={match.blueSideTeam}
                                     redSideTeam={match.redSideTeam}
                                     key={index}
+                                    editMatch={goToEditPage}
                                 />
                             )
                         }

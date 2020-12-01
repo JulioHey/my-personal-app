@@ -8,6 +8,7 @@ const playerAdminRouter = Router();
 const playerController = container.resolve(PlayerController);
 
 playerUserRouter.get("/", playerController.get);
+playerUserRouter.post("/team", playerController.get);
 playerUserRouter.get("/:id", playerController.getById);
 playerAdminRouter.post("/", playerController.post);
 playerAdminRouter.delete("/:id", playerController.remove);
